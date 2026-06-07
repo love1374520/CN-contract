@@ -115,10 +115,15 @@
             color: #333;
             text-align: center;
         }
-        /* 签名区排版优化 */
-        .signature-table {
-            margin-top: 25px;
+        
+        /* 核心修正 1：建立一个「第五条+签名栏」的生命共同体区块，防止签名落单 */
+        .signature-block {
             page-break-inside: avoid !important;
+            margin-top: 20px;
+        }
+        .signature-table {
+            margin-top: 20px;
+            width: 100%;
         }
         .signature-table td {
             width: 50%;
@@ -360,31 +365,31 @@
     <p>4.3 甲方承诺：相关内容仅基于个人研究所需，在不违反著作权法的情形下不侵犯任何第三方权益。</p>
     <p>4.4 若因甲方引发侵权纠纷，全部法律责任由甲方独立承担。</p>
 
-    <h2>第五条 违约责任与争议解决</h2>
-    <p>5.1 若甲方未按时支付服务费用，每逾期一月，应按照未支付金额的千分之五向乙方支付违约金。</p>
-    <p>5.2 本协议引起的任何争议，双方应先尽力协商，协商不成时，双方均<strong>有权</strong>向<strong>乙方（李怡萱）所在地</strong>有管辖权的人民法院提起诉讼。</p>
+    <div class="signature-block">
+        <h2>第五条 违约责任与争议解决</h2>
+        <p>5.1 若甲方未按时支付服务费用，每逾期一月，应按照未支付金额的千分之五向乙方支付违约金。</p>
+        <p>5.2 本协议引起的任何争议，双方应先尽力协商，协商不成时，双方均<strong>有权</strong>向<strong>乙方（李怡萱）所在地</strong>有管辖权的人民法院提起诉讼。</p>
 
-    <div class="html2pdf__page-break"></div>
-
-    <table class="signature-table">
-        <tr>
-            <td>
-                <strong>甲方 (签字盖章)</strong>
-                <canvas id="canvas-partyA"></canvas>
-                <div style="text-align: center;">
-                    <button class="btn-clear" id="clear-btn" onclick="clearCanvas()">清除重签</button>
-                </div>
-                <p style="margin-top:15px; margin-bottom:0;">日期：<span id="date-partyA"></span></p>
-            </td>
-            <td>
-                <strong>乙方 (签字盖章)</strong>
-                <div style="font-family: 'SimSun', serif; font-size: 26px; color: #b30000; font-weight: bold; margin-top: 45px; margin-bottom: 40px; letter-spacing: 5px; text-align: center;">
-                    李怡萱
-                </div>
-                <p style="margin-top:20px; margin-bottom:0;">日期：<span id="date-partyB"></span></p>
-            </td>
-        </tr>
-    </table>
+        <table class="signature-table">
+            <tr>
+                <td>
+                    <strong>甲方 (签字盖章)</strong>
+                    <canvas id="canvas-partyA"></canvas>
+                    <div style="text-align: center;">
+                        <button class="btn-clear" id="clear-btn" onclick="clearCanvas()">清除重签</button>
+                    </div>
+                    <p style="margin-top:15px; margin-bottom:0;">日期：<span id="date-partyA"></span></p>
+                </td>
+                <td>
+                    <strong>乙方 (签字盖章)</strong>
+                    <div style="font-family: 'SimSun', serif; font-size: 26px; color: #b30000; font-weight: bold; margin-top: 45px; margin-bottom: 40px; letter-spacing: 5px; text-align: center;">
+                        李怡萱
+                    </div>
+                    <p style="margin-top:20px; margin-bottom:0;">日期：<span id="date-partyB"></span></p>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <div class="btn-container">
