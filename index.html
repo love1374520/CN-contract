@@ -116,14 +116,17 @@
             text-align: center;
         }
         
-        /* 核心修正 1：建立一个「第五条+签名栏」的生命共同体区块，防止签名落单 */
-        .signature-block {
+        /* 核心修正：让“第二条、计费表格、2.2项费用文字说明”自成一个生命共同体，绝对不分离 */
+        .fee-block {
             page-break-inside: avoid !important;
-            margin-top: 20px;
+            margin-top: 15px;
         }
+        
+        /* 签名区排版 */
         .signature-table {
             margin-top: 20px;
             width: 100%;
+            page-break-inside: avoid !important;
         }
         .signature-table td {
             width: 50%;
@@ -202,7 +205,7 @@
         </tr>
         <tr>
             <td style="width:15%;"><span class="align-label">甲方姓名</span></td>
-            <td style="width:35%;"><input type="text" id="partyA-name" placeholder="请输入姓名或单位 (必填)"></td>
+            <td style="width:35%;"><input type="text" id="partyA-name" placeholder="请输入姓名 or 单位 (必填)"></td>
             <td style="width:15%;"><span class="align-label">乙方名称</span></td>
             <td style="width:35%;">李怡萱</td>
         </tr>
@@ -227,12 +230,12 @@
     </table>
 
     <h2>第一条 服务内容</h2>
-    <p>1.1 甲方委托乙方 provide 已发表的学术论文、期刊等文献的代印（印刷）及扫描服务。具体服务内容包括：</p>
+    <p>1.1 甲方委托乙方提供已发表的学术论文、期刊等文献的代印（印刷）及扫描服务。具体服务内容包括：</p>
     <ul class="bullet-list">
         <li>根据甲方提供的文献信息（如标题、作者、期刊名称、卷期、页码等），协助查找并获取指定文献；</li>
         <li>对文献进行印刷（幕布黑白/彩色印刷，具体要求、单/双面与纸张规格由甲方指定）；</li>
         <li>对文献进行扫描，生成电子文件（格式包括但不限于 PDF、JPG 等，由乙方提供统一规格处理）；</li>
-        <li>将网页或扫描的电子文件通过指定方式（如邮件、云盘等）交付给甲方。</li>
+        <li>将网页 or 扫描的电子文件通过指定方式（如邮件、云盘等）交付给甲方。</li>
     </ul>
     <p>1.2 乙方应确保所提供的文献为已公开发表的合法内容，不涉及未公开的机密信息 or 侵权内容。</p>
     <p>1.3 本服务为根据甲方要求专门定制的个性化商品，属于《中华人民共和国民法典》规定之承揽合同范畴，非通用现货产品。</p>
@@ -277,84 +280,85 @@
         </tbody>
     </table>
 
-    <h2>第二条 服务费用及支付方式</h2>
-    <p>2.1 服务费用：根据文献的页数、印刷规格（黑白/彩色）、纸张大小、单双面要求等因素，双方协商确定具体费用。系统联动单价标准如下：</p>
-    <table>
-        <thead>
-            <tr>
-                <th style="width:20%;">服务项目</th>
-                <th style="width:20%;">纸张规格</th>
-                <th style="width:20%;">印刷型态/颜色</th>
-                <th style="width:20%;">自动单价</th>
-                <th style="width:20%;">合并总页数(面)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>黑白印刷</strong></td>
-                <td>
-                    <select id="size-bw" onchange="calculatePrices()">
-                        <option value="none" selected>无</option>
-                        <option value="A4">A4</option>
-                        <option value="B4">B4</option>
-                        <option value="A3">A3</option>
-                    </select>
-                </td>
-                <td>
-                    <select id="type-bw" onchange="calculatePrices()">
-                        <option value="single">单面印刷</option>
-                        <option value="double">双面印刷</option>
-                    </select>
-                </td>
-                <td><input type="text" id="price-bw" class="readonly-price" readonly value="0.0 元/面"></td>
-                <td><input type="text" id="link-page-bw" class="readonly-price" readonly value="0"></td>
-            </tr>
-            <tr>
-                <td><strong>彩色印刷</strong></td>
-                <td>
-                    <select id="size-color" onchange="calculatePrices()">
-                        <option value="none" selected>无</option>
-                        <option value="A4">A4</option>
-                        <option value="B4">B4</option>
-                        <option value="A3">A3</option>
-                    </select>
-                </td>
-                <td>
-                    <select id="type-color" onchange="calculatePrices()">
-                        <option value="single">单面印刷</option>
-                        <option value="double">双面印刷</option>
-                    </select>
-                </td>
-                <td><input type="text" id="price-color" class="readonly-price" readonly value="0.0 元/面"></td>
-                <td><input type="text" id="link-page-color" class="readonly-price" readonly value="0"></td>
-            </tr>
-            <tr>
-                <td><strong>扫描 (PDF)</strong></td>
-                <td>
-                    <select id="size-scan" onchange="calculatePrices()">
-                        <option value="none" selected>无</option>
-                        <option value="scan">扫描</option>
-                    </select>
-                </td>
-                <td>
-                    <select id="type-scan">
-                        <option value="bw">黑白</option>
-                        <option value="color">彩色</option>
-                    </select>
-                </td>
-                <td><input type="text" id="price-scan" class="readonly-price" readonly value="0.0 元/面"></td>
-                <td><input type="text" id="link-page-scan" class="readonly-price" readonly value="0"></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="fee-block">
+        <h2>第二条 服务费用及支付方式</h2>
+        <p>2.1 服务费用：根据文献的页数、印刷规格（黑白/彩色）、纸张大小、单双面要求等因素，双方协商确定具体费用。系统联动单价标准如下：</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:20%;">服务项目</th>
+                    <th style="width:20%;">纸张规格</th>
+                    <th style="width:20%;">印刷型态/颜色</th>
+                    <th style="width:20%;">自动单价</th>
+                    <th style="width:20%;">合并总页数(面)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>黑白印刷</strong></td>
+                    <td>
+                        <select id="size-bw" onchange="calculatePrices()">
+                            <option value="none" selected>无</option>
+                            <option value="A4">A4</option>
+                            <option value="B4">B4</option>
+                            <option value="A3">A3</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="type-bw" onchange="calculatePrices()">
+                            <option value="single">单面印刷</option>
+                            <option value="double">双面印刷</option>
+                        </select>
+                    </td>
+                    <td><input type="text" id="price-bw" class="readonly-price" readonly value="0.0 元/面"></td>
+                    <td><input type="text" id="link-page-bw" class="readonly-price" readonly value="0"></td>
+                </tr>
+                <tr>
+                    <td><strong>彩色印刷</strong></td>
+                    <td>
+                        <select id="size-color" onchange="calculatePrices()">
+                            <option value="none" selected>无</option>
+                            <option value="A4">A4</option>
+                            <option value="B4">B4</option>
+                            <option value="A3">A3</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="type-color" onchange="calculatePrices()">
+                            <option value="single">单面印刷</option>
+                            <option value="double">双面印刷</option>
+                        </select>
+                    </td>
+                    <td><input type="text" id="price-color" class="readonly-price" readonly value="0.0 元/面"></td>
+                    <td><input type="text" id="link-page-color" class="readonly-price" readonly value="0"></td>
+                </tr>
+                <tr>
+                    <td><strong>扫描 (PDF)</strong></td>
+                    <td>
+                        <select id="size-scan" onchange="calculatePrices()">
+                            <option value="none" selected>无</option>
+                            <option value="scan">扫描</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="type-scan">
+                            <option value="bw">黑白</option>
+                            <option value="color">彩色</option>
+                        </select>
+                    </td>
+                    <td><input type="text" id="price-scan" class="readonly-price" readonly value="0.0 元/面"></td>
+                    <td><input type="text" id="link-page-scan" class="readonly-price" readonly value="0"></td>
+                </tr>
+            </tbody>
+        </table>
 
-    <p>2.2 支付方式与计费规则：</p>
-    <ul class="bullet-list">
-        <li>甲方应在服务开始前 1 日内，向乙方支付服务费定金，金额为：<strong>人民币 50 元整</strong>（大写：人民币伍拾元整）；后续可抵扣于全额款项内。</li>
-        <li><strong>服务费比例条款：本项目将依据委托印刷及扫描的基础费用，每案固定额外加收 30% 的服务费用。</strong></li>
-        <li>甲方应在服务开始后 1 日内，支付包含 30% 服务费在内的全额款项：人民币 <input type="number" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。（※ 此总金额已包含基础印刷扫描费及 30% 的服务费）</li>
-    </ul>
-
+        <p>2.2 支付方式与计费规则：</p>
+        <ul class="bullet-list">
+            <li>甲方应在服务开始前 1 日内，向乙方支付服务费定金，金额为：<strong>人民币 50 元整</strong>（大写：人民币伍拾元整）；后续可抵扣于全额款项内。</li>
+            <li><strong>服务费比例条款：本项目将依据委托印刷及扫描的基础费用，每案固定额外加收 30% 的服务费用。</strong></li>
+            <li>甲方应在服务开始后 1 日内，支付包含 30% 服务费在内的全额款项：人民币 <input type="number" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。（※ 此总金额已包含基础印刷扫描费及 30% 的服务费）</li>
+        </ul>
+    </div>
     <h2>第三条 双方权利与义务</h2>
     <p>3.1 甲方提供之文献及电子文件仅用于个人学习、研究等非商业目的，不得用于 any 商业用途。</p>
     <p>3.2 乙方应尽最大努力获取文献，若因故无法获取应及时通知并退还费用。</p>
@@ -365,31 +369,29 @@
     <p>4.3 甲方承诺：相关内容仅基于个人研究所需，在不违反著作权法的情形下不侵犯任何第三方权益。</p>
     <p>4.4 若因甲方引发侵权纠纷，全部法律责任由甲方独立承担。</p>
 
-    <div class="signature-block">
-        <h2>第五条 违约责任与争议解决</h2>
-        <p>5.1 若甲方未按时支付服务费用，每逾期一月，应按照未支付金额的千分之五向乙方支付违约金。</p>
-        <p>5.2 本协议引起的任何争议，双方应先尽力协商，协商不成时，双方均<strong>有权</strong>向<strong>乙方（李怡萱）所在地</strong>有管辖权的人民法院提起诉讼。</p>
+    <h2>第五条 违约责任与争议解决</h2>
+    <p>5.1 若甲方未按时支付服务费用，每逾期一月，应按照未支付金额的千分之五向乙方支付违约金。</p>
+    <p>5.2 本协议引起的任何争议，双方应先尽力协商，协商不成时，双方均<strong>有权</strong>向<strong>乙方（李怡萱）所在地</strong>有管辖权的人民法院提起诉讼。</p>
 
-        <table class="signature-table">
-            <tr>
-                <td>
-                    <strong>甲方 (签字盖章)</strong>
-                    <canvas id="canvas-partyA"></canvas>
-                    <div style="text-align: center;">
-                        <button class="btn-clear" id="clear-btn" onclick="clearCanvas()">清除重签</button>
-                    </div>
-                    <p style="margin-top:15px; margin-bottom:0;">日期：<span id="date-partyA"></span></p>
-                </td>
-                <td>
-                    <strong>乙方 (签字盖章)</strong>
-                    <div style="font-family: 'SimSun', serif; font-size: 26px; color: #b30000; font-weight: bold; margin-top: 45px; margin-bottom: 40px; letter-spacing: 5px; text-align: center;">
-                        李怡萱
-                    </div>
-                    <p style="margin-top:20px; margin-bottom:0;">日期：<span id="date-partyB"></span></p>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <table class="signature-table">
+        <tr>
+            <td>
+                <strong>甲方 (签字盖章)</strong>
+                <canvas id="canvas-partyA"></canvas>
+                <div style="text-align: center;">
+                    <button class="btn-clear" id="clear-btn" onclick="clearCanvas()">清除重签</button>
+                </div>
+                <p style="margin-top:15px; margin-bottom:0;">日期：<span id="date-partyA"></span></p>
+            </td>
+            <td>
+                <strong>乙方 (签字盖章)</strong>
+                <div style="font-family: 'SimSun', serif; font-size: 26px; color: #b30000; font-weight: bold; margin-top: 45px; margin-bottom: 40px; letter-spacing: 5px; text-align: center;">
+                    李怡萱
+                </div>
+                <p style="margin-top:20px; margin-bottom:0;">日期：<span id="date-partyB"></span></p>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <div class="btn-container">
@@ -397,13 +399,13 @@
 </div>
 
 <script>
-    // 同步当前系统日期
+    // 同步当前 system 日期
     const today = new Date();
     const dateString = `${today.getFullYear()} 年 ${today.getMonth() + 1} 月 ${today.getDate()} 日`;
     document.getElementById('date-partyA').innerText = dateString;
     document.getElementById('date-partyB').innerText = dateString;
 
-    // 单价全域变量 (由于初始化预设为无，初始单价设为 0)
+    // 单价全域变量
     let currentBwUnitPrice = 0.0;
     let currentColorUnitPrice = 0.0;
     let currentScanUnitPrice = 0.0;
