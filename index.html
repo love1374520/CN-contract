@@ -41,11 +41,6 @@
             color: #111;
             page-break-after: avoid; /* 防止标题与正文断页 */
         }
-        /* 强制让区块从新的一页开始 */
-        .page-break-heading {
-            page-break-before: always !important;
-            margin-top: 0px;
-        }
         h3 {
             font-size: 14px;
             margin-top: 15px;
@@ -120,10 +115,10 @@
             color: #333;
             text-align: center;
         }
-        /* 签名区排版 */
+        /* 签名区排版优化 */
         .signature-table {
-            margin-top: 35px;
-            page-break-inside: avoid;
+            margin-top: 25px;
+            page-break-inside: avoid !important;
         }
         .signature-table td {
             width: 50%;
@@ -230,11 +225,11 @@
     <p>1.1 甲方委托乙方 provide 已发表的学术论文、期刊等文献的代印（印刷）及扫描服务。具体服务内容包括：</p>
     <ul class="bullet-list">
         <li>根据甲方提供的文献信息（如标题、作者、期刊名称、卷期、页码等），协助查找并获取指定文献；</li>
-        <li>对文献进行印刷（包括黑白/彩色印刷，具体要求、单/双面与纸张规格由甲方指定）；</li>
+        <li>对文献进行印刷（幕布黑白/彩色印刷，具体要求、单/双面与纸张规格由甲方指定）；</li>
         <li>对文献进行扫描，生成电子文件（格式包括但不限于 PDF、JPG 等，由乙方提供统一规格处理）；</li>
         <li>将网页或扫描的电子文件通过指定方式（如邮件、云盘等）交付给甲方。</li>
     </ul>
-    <p>1.2 乙方应确保所提供的文献为已公开发表的合法内容，不涉及未公开的机密信息或侵权内容。</p>
+    <p>1.2 乙方应确保所提供的文献为已公开发表的合法内容，不涉及未公开的机密信息 or 侵权内容。</p>
     <p>1.3 本服务为根据甲方要求专门定制的个性化商品，属于《中华人民共和国民法典》规定之承揽合同范畴，非通用现货产品。</p>
 
     <h3>委托文献清单</h3>
@@ -277,7 +272,7 @@
         </tbody>
     </table>
 
-    <h2 class="page-break-heading">第二条 服务费用及支付方式</h2>
+    <h2>第二条 服务费用及支付方式</h2>
     <p>2.1 服务费用：根据文献的页数、印刷规格（黑白/彩色）、纸张大小、单双面要求等因素，双方协商确定具体费用。系统联动单价标准如下：</p>
     <table>
         <thead>
@@ -352,7 +347,7 @@
     <ul class="bullet-list">
         <li>甲方应在服务开始前 1 日内，向乙方支付服务费定金，金额为：<strong>人民币 50 元整</strong>（大写：人民币伍拾元整）；后续可抵扣于全额款项内。</li>
         <li><strong>服务费比例条款：本项目将依据委托印刷及扫描的基础费用，每案固定额外加收 30% 的服务费用。</strong></li>
-        <li>甲方应在服务开始后 1 日内，支付包含 30% 服务费在内的全额款项：人民币 <input type="number" style="width: 85px;" id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px;" id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。（※ 此总金额已包含基础印刷扫描费及 30% 的服务费）</li>
+        <li>甲方应在服务开始后 1 日内，支付包含 30% 服务费在内的全额款项：人民币 <input type="number" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。（※ 此总金额已包含基础印刷扫描费及 30% 的服务费）</li>
     </ul>
 
     <h2>第三条 双方权利与义务</h2>
@@ -365,9 +360,11 @@
     <p>4.3 甲方承诺：相关内容仅基于个人研究所需，在不违反著作权法的情形下不侵犯任何第三方权益。</p>
     <p>4.4 若因甲方引发侵权纠纷，全部法律责任由甲方独立承担。</p>
 
-    <h2 class="page-break-heading">第五条 违约责任与争议解决</h2>
+    <h2>第五条 违约责任与争议解决</h2>
     <p>5.1 若甲方未按时支付服务费用，每逾期一月，应按照未支付金额的千分之五向乙方支付违约金。</p>
     <p>5.2 本协议引起的任何争议，双方应先尽力协商，协商不成时，双方均<strong>有权</strong>向<strong>乙方（李怡萱）所在地</strong>有管辖权的人民法院提起诉讼。</p>
+
+    <div class="html2pdf__page-break"></div>
 
     <table class="signature-table">
         <tr>
@@ -497,10 +494,7 @@
         if (n === 0) return '零元整';
         const fraction = ['角', '分'];
         const digit = ['零', '壹', '贰', '参', '肆', '伍', '陆', '柒', '捌', '玖'];
-        const unit = [
-            ['元', '万', '亿'],
-            ['', '拾', '佰', '仟']
-        ];
+        const unit = [['元', '万', '亿'], ['', '拾', '佰', '仟'] ];
         let s = '';
         let p = Math.floor(Math.round(n * 100) % 100);
         for (let i = 0; i < fraction.length; i++) {
@@ -566,7 +560,6 @@
         if (!docName1) { alert('请至少填写第一本“文献名称”，作为主要的委托标的。'); return; }
         if (docPage1 <= 0) { alert('请填写第一本“文献页数”，作为合并算费的基础。'); return; }
 
-        // 防呆拦截：若勾选了服务却没输入总页数
         const sizeBw = document.getElementById('size-bw').value;
         const sizeColor = document.getElementById('size-color').value;
         const sizeScan = document.getElementById('size-scan').value;
@@ -596,12 +589,14 @@
         });
 
         const element = document.getElementById('contract-content');
+        
         const opt = {
             margin:       [15, 15, 15, 15], 
             filename:     `学术文献代印服务同意书_${nameA}.pdf`,
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0 },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak:    { mode: ['avoid-all', 'css'] } 
         };
 
         html2pdf().set(opt).from(element).save().then(() => {
