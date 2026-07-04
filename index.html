@@ -7,14 +7,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
             background-color: #f4f6f9;
             color: #333;
             line-height: 1.6;
             padding: 30px 20px;
             margin: 0;
         }
-        /* A4 规范的合约外框 */
         .contract-wrapper {
             max-width: 790px;
             margin: 0 auto;
@@ -24,173 +23,35 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             box-sizing: border-box;
         }
-        h1 {
-            text-align: center;
-            font-size: 24px;
-            margin-top: 0;
-            margin-bottom: 30px;
-            color: #000;
-            letter-spacing: 1px;
-        }
-        h2 {
-            font-size: 16px;
-            border-bottom: 1.5px solid #333;
-            padding-bottom: 4px;
-            margin-top: 25px;
-            margin-bottom: 12px;
-            color: #111;
-            page-break-after: avoid; /* 防止标题与正文断页 */
-        }
-        h3 {
-            font-size: 14px;
-            margin-top: 15px;
-            margin-bottom: 8px;
-            color: #333;
-        }
-        p, ul, ol {
-            font-size: 14px;
-            margin-top: 6px;
-            margin-bottom: 10px;
-            text-align: justify;
-        }
-        .bullet-list {
-            padding-left: 20px;
-        }
-        .bullet-list li {
-            margin-bottom: 5px;
-        }
-        /* 标准合约表格 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            page-break-inside: avoid; /* 防止表格内部被切断 */
-        }
-        th, td {
-            border: 1px solid #666;
-            padding: 9px 12px;
-            text-align: left;
-            font-size: 14px;
-            vertical-align: middle;
-        }
-        th {
-            background-color: #f5f5f5;
-            font-weight: bold;
-        }
-        
-        /* 双方信息栏标签统一文字宽度与两端平均对齐，并移除冒号 */
-        .align-label {
-            display: inline-block;
-            width: 75px; 
-            text-align: justify;
-            text-align-last: justify; 
-            margin-right: 8px; 
-        }
-
-        /* 输入框与选单基础视觉 */
+        h1 { text-align: center; font-size: 24px; margin-top: 0; margin-bottom: 30px; color: #000; letter-spacing: 1px; }
+        h2 { font-size: 16px; border-bottom: 1.5px solid #333; padding-bottom: 4px; margin-top: 25px; margin-bottom: 12px; color: #111; page-break-after: avoid; }
+        h3 { font-size: 14px; margin-top: 15px; margin-bottom: 8px; color: #333; }
+        p, ul, ol { font-size: 14px; margin-top: 6px; margin-bottom: 10px; text-align: justify; }
+        .bullet-list { padding-left: 20px; }
+        .bullet-list li { margin-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; page-break-inside: avoid; }
+        th, td { border: 1px solid #666; padding: 9px 12px; text-align: left; font-size: 14px; vertical-align: middle; }
+        th { background-color: #f5f5f5; font-weight: bold; }
+        .align-label { display: inline-block; width: 75px; text-align: justify; text-align-last: justify; margin-right: 8px; }
         input[type="text"], input[type="tel"], input[type="email"], input[type="number"], select {
-            width: 100%;
-            padding: 5px 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            font-size: 13px;
-            background-color: #fff;
-            font-family: inherit;
+            width: 100%; padding: 5px 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; background-color: #fff; font-family: inherit;
         }
-        input:focus, select:focus {
-            border-color: #333;
-            outline: none;
-        }
-        /* 唯读大写与联动输入框样式 */
-        .readonly-amount {
-            background-color: #f8f9fa !important;
-            color: #b30000;
-            font-weight: bold;
-            cursor: not-allowed;
-        }
-        .readonly-price {
-            background-color: #f8f9fa !important;
-            font-weight: bold;
-            color: #333;
-            text-align: center;
-        }
-        
-        /* 核心修正：让“第二条、计费表格、2.2项费用文字说明”自成一个生命共同体，绝对不分离 */
-        .fee-block {
-            page-break-inside: avoid !important;
-            margin-top: 15px;
-        }
-        
-        /* 签名区排版 */
-        .signature-table {
-            margin-top: 20px;
-            width: 100%;
-            page-break-inside: avoid !important;
-        }
-        .signature-table td {
-            width: 50%;
-            padding: 20px;
-            background: #fff;
-            height: 180px;
-            vertical-align: top;
-        }
-        canvas {
-            border: 1px dashed #999;
-            background: #fcfcfc;
-            cursor: crosshair;
-            width: 100%;
-            height: 110px;
-            margin-top: 10px;
-        }
-        .btn-container {
-            text-align: center;
-            margin-top: 30px;
-            margin-bottom: 50px;
-        }
-        button {
-            padding: 12px 35px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s;
-        }
-        .btn-clear {
-            background-color: #f8f9fa;
-            color: #666;
-            border: 1px solid #ccc;
-            margin-top: 8px;
-            padding: 4px 12px;
-            font-size: 12px;
-            font-weight: normal;
-        }
+        input:focus, select:focus { border-color: #333; outline: none; }
+        .readonly-amount { background-color: #f8f9fa !important; color: #b30000; font-weight: bold; cursor: not-allowed; }
+        .readonly-price { background-color: #f8f9fa !important; font-weight: bold; color: #333; text-align: center; }
+        .fee-block { page-break-inside: avoid !important; margin-top: 15px; }
+        .sticky-footer-block { page-break-inside: avoid !important; margin-top: 25px; }
+        .signature-table { margin-top: 20px; width: 100%; page-break-inside: avoid !important; }
+        .signature-table td { width: 50%; padding: 20px; background: #fff; height: 180px; vertical-align: top; }
+        canvas { border: 1px dashed #999; background: #fcfcfc; cursor: crosshair; width: 100%; height: 110px; margin-top: 10px; }
+        .btn-container { text-align: center; margin-top: 30px; margin-bottom: 50px; }
+        button { padding: 12px 35px; font-size: 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s; }
+        .btn-clear { background-color: #f8f9fa; color: #666; border: 1px solid #ccc; margin-top: 8px; padding: 4px 12px; font-size: 12px; font-weight: normal; }
         .btn-clear:hover { background-color: #edd; color: #a00; border-color: #a00; }
-        .btn-submit {
-            background-color: #002d62;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0,45,98,0.2);
-        }
+        .btn-submit { background-color: #002d62; color: white; box-shadow: 0 4px 10px rgba(0,45,98,0.2); }
         button:hover { opacity: 0.9; }
-
-        /* 导出 PDF 专用的纯文字样式替代框 */
-        .pdf-replacement {
-            display: inline-block;
-            border-bottom: 1px solid #000;
-            min-width: 60px;
-            padding: 0 4px;
-            font-weight: bold;
-            color: #000;
-        }
-
-        /* 强制在导出时移除画布边框 and 背景 */
-        @media print {
-            canvas {
-                border: none !important;
-                background: transparent !important;
-            }
-        }
+        .pdf-replacement { display: inline-block; border-bottom: 1px solid #000; min-width: 60px; padding: 0 4px; font-weight: bold; color: #000; }
+        @media print { canvas { border: none !important; background: transparent !important; } }
     </style>
 </head>
 <body>
@@ -205,7 +66,7 @@
         </tr>
         <tr>
             <td style="width:15%;"><span class="align-label">甲方姓名</span></td>
-            <td style="width:35%;"><input type="text" id="partyA-name" placeholder="请输入姓名 or 单位 (必填)"></td>
+            <td style="width:35%;"><input type="text" id="partyA-name" placeholder="请输入姓名或单位 (必填)"></td>
             <td style="width:15%;"><span class="align-label">乙方名称</span></td>
             <td style="width:35%;">李怡萱</td>
         </tr>
@@ -219,7 +80,7 @@
             <td><span class="align-label">电子邮箱</span></td>
             <td><input type="email" id="partyA-email" placeholder="请输入电子邮箱 (必填)"></td>
             <td><span class="align-label">电子邮箱</span></td>
-            <td>Shiuan991026@gamil.com</td>
+            <td>Shiuan991026@gmail.com</td>
         </tr>
         <tr>
             <td><span class="align-label">平台昵称</span></td>
@@ -233,20 +94,19 @@
     <p>1.1 甲方委托乙方提供已发表的学术论文、期刊等文献的代印（印刷）及扫描服务。具体服务内容包括：</p>
     <ul class="bullet-list">
         <li>根据甲方提供的文献信息（如标题、作者、期刊名称、卷期、页码等），协助查找并获取指定文献；</li>
-        <li>对文献进行印刷（幕布黑白/彩色印刷，具体要求、单/双面与纸张规格由甲方指定）；</li>
-        <li>对文献进行扫描，生成电子文件（格式包括但不限于 PDF、JPG 等，由乙方提供统一规格处理）；</li>
-        <li>将网页 or 扫描的电子文件通过指定方式（如邮件、云盘等）交付给甲方。</li>
+        <li>根据甲方于本合约中选定之服务项目，提供相应之黑白印刷、彩色印刷或电子扫描服务；</li>
+        <li>将网页或扫描的电子文件（PDF格式）或实体印刷本透过指定方式交付给甲方。</li>
     </ul>
-    <p>1.2 乙方应确保所提供的文献为已公开发表的合法内容，不涉及未公开的机密信息 or 侵权内容。</p>
+    <p>1.2 乙方应确保所提供的文献为已公开发表的合法内容，不涉及未公开的机密信息或侵权内容。</p>
     <p>1.3 本服务为根据甲方要求专门定制的个性化商品，属于《中华人民共和国民法典》规定之承揽合同范畴，非通用现货产品。</p>
 
     <h3>委托文献清单</h3>
     <table>
         <thead>
             <tr>
-                <th style="width:25%;">文献名称</th>
+                <th style="width:30%;">文献名称</th>
                 <th style="width:20%;">作者</th>
-                <th style="width:25%;">指定范围</th>
+                <th style="width:20%;">指定范围</th>
                 <th style="width:15%;">书索号</th>
                 <th style="width:15%;">页数(面)</th>
             </tr>
@@ -274,7 +134,7 @@
                 <td><input type="number" id="doc-page-3" min="0" oninput="calculateCrossTableTotal()" placeholder="选填"></td>
             </tr>
             <tr style="background-color: #fafafa; font-weight: bold;">
-                <td colspan="4" style="text-align: right; color: #555;">跨文献合并总页数：</td>
+                <td colspan="4" style="text-align: right; color: #555;">跨文献委托合并总面数：</td>
                 <td><input type="text" id="doc-page-summary" class="readonly-price" style="color: #002d62;" readonly value="0"></td>
             </tr>
         </tbody>
@@ -282,116 +142,89 @@
 
     <div class="fee-block">
         <h2>第二条 服务费用及支付方式</h2>
-        <p>2.1 服务费用：根据文献的页数、印刷规格（黑白/彩色）、纸张大小、单双面要求等因素，双方协商确定具体费用。系统联动单价标准如下：</p>
+        <p>2.1 服务费用：根据委托之服务项目、页数及纸张规格等因素确定具体费用。系统联动单价标准如下（单次委托仅限单一类别计算）：</p>
         <table>
             <thead>
                 <tr>
-                    <th style="width:20%;">服务项目</th>
-                    <th style="width:20%;">纸张规格</th>
-                    <th style="width:20%;">印刷型态/颜色</th>
-                    <th style="width:20%;">自动单价</th>
-                    <th style="width:20%;">合并总页数(面)</th>
+                    <th style="width:30%;">委托服务项目</th>
+                    <th style="width:20%;">纸张/交付规格</th>
+                    <th style="width:15%;">印刷型态</th>
+                    <th style="width:15%;">自动单价</th>
+                    <th style="width:20%;">本项计费总金额</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>黑白印刷</strong></td>
                     <td>
-                        <select id="size-bw" onchange="calculatePrices()">
-                            <option value="none" selected>无</option>
-                            <option value="A4">A4</option>
+                        <select id="service-type" onchange="calculatePrices()" style="font-weight: bold; color: #002d62;">
+                            <option value="bw" selected>委托：黑白印刷</option>
+                            <option value="color">委托：彩色印刷</option>
+                            <option value="scan">委托：电子扫描 (PDF)</option>
+                            <option value="none">不需任何服务</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="size-print" onchange="calculatePrices()">
+                            <option value="A4" selected>A4</option>
                             <option value="B4">B4</option>
                             <option value="A3">A3</option>
                         </select>
                     </td>
                     <td>
-                        <select id="type-bw" onchange="calculatePrices()">
+                        <select id="type-print">
                             <option value="single">单面印刷</option>
                             <option value="double">双面印刷</option>
                         </select>
                     </td>
-                    <td><input type="text" id="price-bw" class="readonly-price" readonly value="0.0 元/面"></td>
-                    <td><input type="text" id="link-page-bw" class="readonly-price" readonly value="0"></td>
-                </tr>
-                <tr>
-                    <td><strong>彩色印刷</strong></td>
-                    <td>
-                        <select id="size-color" onchange="calculatePrices()">
-                            <option value="none" selected>无</option>
-                            <option value="A4">A4</option>
-                            <option value="B4">B4</option>
-                            <option value="A3">A3</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select id="type-color" onchange="calculatePrices()">
-                            <option value="single">单面印刷</option>
-                            <option value="double">双面印刷</option>
-                        </select>
-                    </td>
-                    <td><input type="text" id="price-color" class="readonly-price" readonly value="0.0 元/面"></td>
-                    <td><input type="text" id="link-page-color" class="readonly-price" readonly value="0"></td>
-                </tr>
-                <tr>
-                    <td><strong>扫描 (PDF)</strong></td>
-                    <td>
-                        <select id="size-scan" onchange="calculatePrices()">
-                            <option value="none" selected>无</option>
-                            <option value="scan">扫描</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select id="type-scan">
-                            <option value="bw">黑白</option>
-                            <option value="color">彩色</option>
-                        </select>
-                    </td>
-                    <td><input type="text" id="price-scan" class="readonly-price" readonly value="0.0 元/面"></td>
-                    <td><input type="text" id="link-page-scan" class="readonly-price" readonly value="0"></td>
+                    <td><input type="text" id="price-display" class="readonly-price" readonly value="2.0 元/页"></td>
+                    <td><input type="text" id="total-item-price" class="readonly-price" readonly value="0.0 元"></td>
                 </tr>
             </tbody>
         </table>
 
         <p>2.2 支付方式与计费规则：</p>
         <ul class="bullet-list">
-            <li>甲方应在服务开始前 1 日内，向乙方支付服务费定金，金额为：<strong>人民币 50 元整</strong>（大写：人民币伍拾元整）；后续可抵扣于全额款项内。</li>
-            <li><strong>服务费比例条款：本项目将依据委托印刷及扫描的基础费用，每案固定额外加收 30% 的服务费用。</strong></li>
-            <li>甲方应在服务开始后 1 日内，支付包含 30% 服务费在内的全额款项：人民币 <input type="number" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。（※ 此总金额已包含基础印刷扫描费及 30% 的服务费）</li>
+            <li>甲方应在服务开始前 1 日内，向乙方支付服务费定金（<strong>总金额之 50%</strong>），金额为：人民币 <input type="text" style="width: 85px;" id="deposit-num" class="readonly-amount" readonly placeholder="自动计算"> 元（大写：人民币 <input type="text" style="width: 210px;" id="deposit-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）；后续可抵扣于全额款项内。</li>
+            <li><strong>服务费比例条款：本项目将依据委托项目之基础费用（总面数折算双面计费），每案固定额外加收 30% 的服务费用。</strong></li>
+            <li>甲方应在服务开始后 1 日内，支付包含 30% 服务费在内的全额款项：人民币 <input type="text" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。（※ 此总金额已包含基础委托费及 30% 的额外服务费）</li>
         </ul>
     </div>
+
     <h2>第三条 双方权利与义务</h2>
-    <p>3.1 甲方提供之文献及电子文件仅用于个人学习、研究等非商业目的，不得用于 any 商业用途。</p>
+    <p>3.1 甲方提供之文献及电子文件仅用于个人学习、研究等非商业目的，不得用于任何商业用途。</p>
     <p>3.2 乙方应尽最大努力获取文献，若因故无法获取应及时通知并退还费用。</p>
 
     <h2>第四条 知识产权与保密条款（非常重要）</h2>
-    <p>4.1 乙方仅提供代印、扫描服务，不享有 any 知识产权。</p>
+    <p>4.1 乙方仅提供代印、扫描服务，不享有任何知识产权。</p>
     <p>4.2 双方对在服务过程中知悉的个人信息保密，期限为 3 年。</p>
     <p>4.3 甲方承诺：相关内容仅基于个人研究所需，在不违反著作权法的情形下不侵犯任何第三方权益。</p>
     <p>4.4 若因甲方引发侵权纠纷，全部法律责任由甲方独立承担。</p>
 
-    <h2>第五条 违约责任与争议解决</h2>
-    <p>5.1 若甲方未按时支付服务费用，每逾期一月，应按照未支付金额的千分之五向乙方支付违约金。</p>
-    <p>5.2 本协议引起的任何争议，双方应先尽力协商，协商不成时，双方均<strong>有权</strong>向<strong>乙方（李怡萱）所在地</strong>有管辖权的人民法院提起诉讼。</p>
+    <div class="sticky-footer-block">
+        <h2>第五条 违约责任与争议解决</h2>
+        <p>5.1 若甲方未按时支付服务费用，每逾期一月，应按照未支付金额的千分之五向乙方支付违约金。</p>
+        <p>5.2 本协议引起的任何争议，双方应先尽力协商，协商不成时，双方均<strong>有权</strong>向<strong>乙方（李怡萱）所在地</strong>有管辖权的人民法院提起诉讼。</p>
 
-    <table class="signature-table">
-        <tr>
-            <td>
-                <strong>甲方 (签字盖章)</strong>
-                <canvas id="canvas-partyA"></canvas>
-                <div style="text-align: center;">
-                    <button class="btn-clear" id="clear-btn" onclick="clearCanvas()">清除重签</button>
-                </div>
-                <p style="margin-top:15px; margin-bottom:0;">日期：<span id="date-partyA"></span></p>
-            </td>
-            <td>
-                <strong>乙方 (签字盖章)</strong>
-                <div style="font-family: 'SimSun', serif; font-size: 26px; color: #b30000; font-weight: bold; margin-top: 45px; margin-bottom: 40px; letter-spacing: 5px; text-align: center;">
-                    李怡萱
-                </div>
-                <p style="margin-top:20px; margin-bottom:0;">日期：<span id="date-partyB"></span></p>
-            </td>
-        </tr>
-    </table>
+        <table class="signature-table">
+            <tr>
+                <td>
+                    <strong>甲方 (签字盖章)</strong>
+                    <canvas id="canvas-partyA"></canvas>
+                    <div style="text-align: center;">
+                        <button class="btn-clear" id="clear-btn" onclick="clearCanvas()">清除重签</button>
+                    </div>
+                    <p style="margin-top:15px; margin-bottom:0;">日期：<span id="date-partyA"></span></p>
+                </td>
+                <td>
+                    <strong>乙方 (签字盖章)</strong>
+                    <div style="font-family: 'SimSun', serif; font-size: 26px; color: #b30000; font-weight: bold; margin-top: 45px; margin-bottom: 40px; letter-spacing: 5px; text-align: center;">
+                        李怡萱
+                    </div>
+                    <p style="margin-top:20px; margin-bottom:0;">日期：<span id="date-partyB"></span></p>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <div class="btn-container">
@@ -399,134 +232,175 @@
 </div>
 
 <script>
-    // 同步当前 system 日期
-    const today = new Date();
-    const dateString = `${today.getFullYear()} 年 ${today.getMonth() + 1} 月 ${today.getDate()} 日`;
-    document.getElementById('date-partyA').innerText = dateString;
-    document.getElementById('date-partyB').innerText = dateString;
+    window.addEventListener('DOMContentLoaded', () => {
+        try {
+            const today = new Date();
+            const dateString = `${today.getFullYear()} 年 ${today.getMonth() + 1} 月 ${today.getDate()} 日`;
+            document.getElementById('date-partyA').innerText = dateString;
+            document.getElementById('date-partyB').innerText = dateString;
+            calculateCrossTableTotal();
+        } catch(e) {
+            console.error("Initialization Error:", e);
+        }
+    });
 
-    // 单价全域变量
-    let currentBwUnitPrice = 0.0;
-    let currentColorUnitPrice = 0.0;
-    let currentScanUnitPrice = 0.0;
+    let currentUnitPrice = 2.0;
 
-    // 跨表格核心联动计算
     function calculateCrossTableTotal() {
-        const p1 = parseFloat(document.getElementById('doc-page-1').value) || 0;
-        const p2 = parseFloat(document.getElementById('doc-page-2').value) || 0;
-        const p3 = parseFloat(document.getElementById('doc-page-3').value) || 0;
+        try {
+            const p1 = parseFloat(document.getElementById('doc-page-1').value) || 0;
+            const p2 = parseFloat(document.getElementById('doc-page-2').value) || 0;
+            const p3 = parseFloat(document.getElementById('doc-page-3').value) || 0;
 
-        const totalCombinedPages = p1 + p2 + p3;
-        document.getElementById('doc-page-summary').value = totalCombinedPages;
+            const totalCombinedPages = p1 + p2 + p3;
+            document.getElementById('doc-page-summary').value = totalCombinedPages;
 
-        calculatePrices();
+            calculatePrices();
+        } catch (e) {
+            console.error("Calculation Error:", e);
+        }
     }
 
-    // 动态价格联动与无服务的单价清零
     function calculatePrices() {
-        const summaryPages = parseFloat(document.getElementById('doc-page-summary').value) || 0;
+        try {
+            const summaryPages = parseFloat(document.getElementById('doc-page-summary').value) || 0;
+            // 核心：在后台默默将总面数除以 2 换算成计费页数，UI 不显示折算栏位
+            const billingPages = Math.ceil(summaryPages / 2);
 
-        // 黑白印刷联动
-        const sizeBw = document.getElementById('size-bw').value;
-        const priceBwInput = document.getElementById('price-bw');
-        if (sizeBw === 'none') {
-            currentBwUnitPrice = 0.0;
-            document.getElementById('link-page-bw').value = 0;
-        } else {
-            currentBwUnitPrice = 2.0;
-            document.getElementById('link-page-bw').value = summaryPages;
+            const serviceType = document.getElementById('service-type').value;
+            const sizePrint = document.getElementById('size-print').value;
+            
+            const priceDisplay = document.getElementById('price-display');
+            const itemTotalDisplay = document.getElementById('total-item-price');
+            const sizeSelect = document.getElementById('size-print');
+            const typeSelect = document.getElementById('type-print');
+
+            // 大陆版单价判定逻辑
+            if (serviceType === 'none') {
+                currentUnitPrice = 0.0;
+                sizeSelect.disabled = false;
+                typeSelect.disabled = false;
+            } else if (serviceType === 'bw') {
+                sizeSelect.disabled = false;
+                typeSelect.disabled = false;
+                currentUnitPrice = 2.0; 
+            } else if (serviceType === 'color') {
+                sizeSelect.disabled = false;
+                typeSelect.disabled = false;
+                currentUnitPrice = 4.0; 
+            } else if (serviceType === 'scan') {
+                currentUnitPrice = 1.5;
+                sizeSelect.disabled = true;
+                typeSelect.disabled = true;
+            }
+
+            priceDisplay.value = currentUnitPrice.toFixed(1) + " 元/页";
+            
+            const itemTotal = currentUnitPrice * billingPages;
+            itemTotalDisplay.value = itemTotal.toFixed(2) + " 元";
+            
+            autoSumBudget(itemTotal, summaryPages);
+        } catch (e) {
+            console.error("Price logic Error:", e);
         }
-        priceBwInput.value = currentBwUnitPrice.toFixed(1) + " 元/面";
-
-        // 彩色印刷联动
-        const sizeColor = document.getElementById('size-color').value;
-        const priceColorInput = document.getElementById('price-color');
-        if (sizeColor === 'none') {
-            currentColorUnitPrice = 0.0;
-            document.getElementById('link-page-color').value = 0;
-        } else {
-            currentColorUnitPrice = 4.0;
-            document.getElementById('link-page-color').value = summaryPages;
-        }
-        priceColorInput.value = currentColorUnitPrice.toFixed(1) + " 元/面";
-
-        // 扫描规格联动
-        const sizeScan = document.getElementById('size-scan').value;
-        const priceScanInput = document.getElementById('price-scan');
-        if (sizeScan === 'none') {
-            currentScanUnitPrice = 0.0;
-            document.getElementById('link-page-scan').value = 0;
-        } else {
-            currentScanUnitPrice = 1.5;
-            document.getElementById('link-page-scan').value = summaryPages;
-        }
-        priceScanInput.value = currentScanUnitPrice.toFixed(1) + " 元/面";
-
-        autoSumBudget();
     }
 
-    // 全自动结算
-    function autoSumBudget() {
-        const pageBw = parseFloat(document.getElementById('link-page-bw').value) || 0;
-        const pageColor = parseFloat(document.getElementById('link-page-color').value) || 0;
-        const pageScanInput = parseFloat(document.getElementById('link-page-scan').value) || 0;
-
-        // 2页扫描折算成1页空間，向上取整
-        const effectiveScanPages = Math.ceil(pageScanInput / 2);
-
-        // 基础印制与扫描总价
-        const basePrice = (currentBwUnitPrice * pageBw) + (currentColorUnitPrice * pageColor) + (currentScanUnitPrice * effectiveScanPages);
-        
+    function autoSumBudget(basePrice, pageCount) {
         let totalPrice = 0;
-        if (basePrice > 0) {
-            // 额外加收 30% 服务费
+        let depositPrice = 0;
+        
+        // 核心：基础费用乘以 1.3 (+30%服务费)
+        if (basePrice > 0 || pageCount > 0) {
             totalPrice = basePrice * 1.3;
-            totalPrice = Math.round(totalPrice * 100) / 100;
+            depositPrice = totalPrice * 0.5;
         }
 
         const numInput = document.getElementById('total-num');
         const wordInput = document.getElementById('total-word');
+        const depositNumInput = document.getElementById('deposit-num');
+        const depositWordInput = document.getElementById('deposit-word');
 
         if (totalPrice === 0) {
             numInput.value = '';
             wordInput.value = '';
+            depositNumInput.value = '';
+            depositWordInput.value = '';
             return;
         }
 
-        numInput.value = totalPrice;
+        numInput.value = totalPrice.toFixed(2);
         wordInput.value = numberToChineseCN(totalPrice);
+        
+        depositNumInput.value = depositPrice.toFixed(2);
+        depositWordInput.value = numberToChineseCN(depositPrice);
     }
 
-    function numberToChineseCN(n) {
-        if (n === 0) return '零元整';
-        const fraction = ['角', '分'];
-        const digit = ['零', '壹', '贰', '参', '肆', '伍', '陆', '柒', '捌', '玖'];
-        const unit = [['元', '万', '亿'], ['', '拾', '佰', '仟'] ];
-        let s = '';
-        let p = Math.floor(Math.round(n * 100) % 100);
-        for (let i = 0; i < fraction.length; i++) {
-            if (p > 0) {
-                let d = Math.floor(Math.round(n * Math.pow(10, i + 1)) % 10);
-                if (d > 0) s += digit[d] + fraction[i];
+    function numberToChineseCN(money) {
+        if (money === 0) return '零元整';
+        const cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+        const cnIntRadice = ['', '拾', '佰', '仟'];
+        const cnIntUnits = ['', '万', '亿', '兆'];
+        const cnDecUnits = ['角', '分'];
+        const cnInteger = '整';
+        const cnIntLast = '元';
+
+        let integerNum; 
+        let decimalNum; 
+        let chineseStr = ''; 
+
+        money = Math.round(money * 100) / 100; 
+        let moneyStr = money.toString();
+        
+        if (moneyStr.indexOf('.') === -1) {
+            integerNum = moneyStr;
+            decimalNum = '';
+        } else {
+            let parts = moneyStr.split('.');
+            integerNum = parts[0];
+            decimalNum = parts[1].substring(0, 2);
+            if (decimalNum.length === 1) decimalNum += '0';
+        }
+
+        if (parseInt(integerNum, 10) > 0) {
+            let zeroCount = 0;
+            let IntLen = integerNum.length;
+            for (let i = 0; i < IntLen; i++) {
+                let n = integerNum.substr(i, 1);
+                let p = IntLen - i - 1;
+                let q = Math.floor(p / 4);
+                let m = p % 4;
+                if (n === '0') {
+                    zeroCount++;
+                } else {
+                    if (zeroCount > 0) chineseStr += cnNums[0];
+                    zeroCount = 0;
+                    chineseStr += cnNums[parseInt(n)] + cnIntRadice[m];
+                }
+                if (m === 0 && zeroCount < 4) chineseStr += cnIntUnits[q];
+            }
+            chineseStr += cnIntLast;
+        }
+
+        if (decimalNum !== '') {
+            let decLen = decimalNum.length;
+            for (let i = 0; i < decLen; i++) {
+                let n = decimalNum.substr(i, 1);
+                if (n !== '0') {
+                    chineseStr += cnNums[Number(n)] + cnDecUnits[i];
+                } else if (i === 0 && parseInt(integerNum, 10) > 0 && decimalNum.substr(1, 1) !== '0') {
+                    chineseStr += cnNums[0]; 
+                }
             }
         }
-        let integerPart = Math.floor(n);
-        if (s === '') s = '整';
-        let unitHead = s; s = '';
-        for (let i = 0; i < unit[0].length && integerPart > 0; i++) {
-            let p = '';
-            for (let j = 0; j < unit[1].length && integerPart > 0; j++) {
-                p = digit[integerPart % 10] + unit[1][j] + p;
-                integerPart = Math.floor(integerPart / 10);
-            }
-            s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+
+        if (chineseStr === '') {
+            chineseStr += cnNums[0] + cnIntLast + cnInteger;
+        } else if (decimalNum === '' || decimalNum === '00') {
+            chineseStr += cnInteger;
         }
-        let result = s.replace(/(零.)*零元/, '元').replace(/(零.)+/g, '零').replace(/^整$/, '零元整');
-        if (result.startsWith('元')) result = result.substring(1);
-        return result + (unitHead === '整' ? '整' : '');
+        return chineseStr;
     }
 
-    // 签名画布逻辑
     const canvas = document.getElementById('canvas-partyA');
     const ctx = canvas.getContext('2d');
     let isDrawing = false;
@@ -551,7 +425,6 @@
     canvas.addEventListener('touchstart', startDraw); canvas.addEventListener('touchmove', draw); canvas.addEventListener('touchend', stopDraw);
     function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
-    // 验证字段并导出
     function generatePDF() {
         const nameA = document.getElementById('partyA-name').value.trim();
         const phoneA = document.getElementById('partyA-phone').value.trim();
@@ -561,20 +434,11 @@
         const docPage1 = parseFloat(document.getElementById('doc-page-1').value) || 0;
 
         if (!nameA) { alert('请填写甲方“甲方姓名”，此为必填写字段。'); return; }
-        if (!phoneA) { alert('请填写甲方“联系电话”，此為必填写字段。'); return; }
-        if (!emailA) { alert('请填写甲方“电子邮箱”，此為必填写字段。'); return; }
-        if (!nicknameA) { alert('请填写甲方“平台昵称”，此為必填写字段。'); return; }
+        if (!phoneA) { alert('请填写甲方“联系电话”，此为必填写字段。'); return; }
+        if (!emailA) { alert('请填写甲方“电子邮箱”，此为必填写字段。'); return; }
+        if (!nicknameA) { alert('请填写甲方“平台昵称”，此为必填写字段。'); return; }
         if (!docName1) { alert('请至少填写第一本“文献名称”，作为主要的委托标的。'); return; }
         if (docPage1 <= 0) { alert('请填写第一本“文献页数”，作为合并算费的基础。'); return; }
-
-        const sizeBw = document.getElementById('size-bw').value;
-        const sizeColor = document.getElementById('size-color').value;
-        const sizeScan = document.getElementById('size-scan').value;
-        const summaryPages = parseFloat(document.getElementById('doc-page-summary').value) || 0;
-
-        if (sizeBw !== 'none' && summaryPages <= 0) { alert('您已勾选黑白印刷，但文献总页数为0，请先输入文献页数。'); return; }
-        if (sizeColor !== 'none' && summaryPages <= 0) { alert('您已勾选彩色印刷，但文献总页数为0，请先输入文献页数。'); return; }
-        if (sizeScan !== 'none' && summaryPages <= 0) { alert('您已勾选扫描服务，但文献总页数为0，请先输入文献页数。'); return; }
 
         document.getElementById('clear-btn').style.display = 'none';
 
@@ -598,15 +462,28 @@
         const element = document.getElementById('contract-content');
         
         const opt = {
-            margin:       [15, 15, 15, 15], 
+            margin:       [15, 15, 22, 15], 
             filename:     `学术文献代印服务同意书_${nameA}.pdf`,
             image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0 },
+            html2canvas:  { 
+                scale: 2.3,             
+                useCORS: true, 
+                scrollY: 0,
+                letterRendering: true   
+            },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
             pagebreak:    { mode: ['avoid-all', 'css'] } 
         };
 
-        html2pdf().set(opt).from(element).save().then(() => {
+        html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
+            const totalPages = pdf.internal.getNumberOfPages(); 
+            for (let i = 1; i <= totalPages; i++) {
+                pdf.setPage(i);
+                pdf.setFontSize(10);
+                pdf.setTextColor(110);
+                pdf.text('第 ' + i + ' 页，共计 ' + totalPages + ' 页', pdf.internal.pageSize.getWidth() / 2, pdf.internal.pageSize.getHeight() - 11, { align: 'center' });
+            }
+        }).save().then(() => {
             originalStates.forEach(state => {
                 const replacement = state.parent.querySelector('.pdf-replacement');
                 if (replacement) state.parent.replaceChild(state.inputNode, replacement);
