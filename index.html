@@ -3,49 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学术文献代印扫描服务同意书</title>
+    <title>学术文献代印掃描服务同意书</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
             background-color: #f4f6f9;
             color: #333;
-            line-height: 1.6;
-            padding: 30px 20px;
+            line-height: 1.5;
+            padding: 15px; /* 縮減整體留白，使版面向上 */
             margin: 0;
         }
         .contract-wrapper {
             max-width: 790px;
             margin: 0 auto;
             background: #fff;
-            padding: 50px 40px;
+            padding: 30px 40px; /* 縮減內距，使內容更緊湊 */
             border-radius: 4px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             box-sizing: border-box;
         }
-        h1 { text-align: center; font-size: 24px; margin-top: 0; margin-bottom: 30px; color: #000; letter-spacing: 1px; }
-        h2 { font-size: 16px; border-bottom: 1.5px solid #333; padding-bottom: 4px; margin-top: 25px; margin-bottom: 12px; color: #111; page-break-after: avoid; }
-        h3 { font-size: 14px; margin-top: 15px; margin-bottom: 8px; color: #333; }
-        p, ul, ol { font-size: 14px; margin-top: 6px; margin-bottom: 10px; text-align: justify; }
+        h1 { text-align: center; font-size: 24px; margin-top: 0; margin-bottom: 20px; color: #000; letter-spacing: 1px; }
+        h2 { font-size: 16px; border-bottom: 1.5px solid #333; padding-bottom: 4px; margin-top: 15px; margin-bottom: 10px; color: #111; page-break-after: avoid; }
+        h3 { font-size: 14px; margin-top: 10px; margin-bottom: 8px; color: #333; }
+        p, ul, ol { font-size: 14px; margin-top: 4px; margin-bottom: 8px; text-align: justify; }
         .bullet-list { padding-left: 20px; }
-        .bullet-list li { margin-bottom: 5px; }
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; page-break-inside: avoid; }
-        th, td { border: 1px solid #666; padding: 9px 12px; text-align: left; font-size: 14px; vertical-align: middle; }
+        .bullet-list li { margin-bottom: 4px; }
+        
+        /* 核心修復 1：確保條文的小標題與內容不會被切斷 (防止如 5.3 斷裂) */
+        .clause-block { page-break-inside: avoid; margin-bottom: 10px; }
+        .clause-title { font-weight: bold; margin-bottom: 4px; color: #222; }
+
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        tr { page-break-inside: avoid; } /* 防止表格行被切斷 */
+        th, td { border: 1px solid #666; padding: 7px 10px; text-align: left; font-size: 13px; vertical-align: middle; }
         th { background-color: #f5f5f5; font-weight: bold; }
         .align-label { display: inline-block; width: 75px; text-align: justify; text-align-last: justify; margin-right: 8px; }
         input[type="text"], input[type="tel"], input[type="email"], input[type="number"], select {
-            width: 100%; padding: 5px 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; background-color: #fff; font-family: inherit;
+            width: 100%; padding: 4px 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; background-color: #fff; font-family: inherit;
         }
         input:focus, select:focus { border-color: #333; outline: none; }
         .readonly-amount { background-color: #f8f9fa !important; color: #b30000; font-weight: bold; cursor: not-allowed; }
         .readonly-price { background-color: #f8f9fa !important; font-weight: bold; color: #333; text-align: center; }
-        .fee-block { page-break-inside: avoid !important; margin-top: 15px; }
-        .sticky-footer-block { page-break-inside: avoid !important; margin-top: 25px; }
-        .signature-table { margin-top: 20px; width: 100%; page-break-inside: avoid !important; }
-        .signature-table td { width: 50%; padding: 20px; background: #fff; height: 180px; vertical-align: top; }
-        canvas { border: 1px dashed #999; background: #fcfcfc; cursor: crosshair; width: 100%; height: 110px; margin-top: 10px; }
-        .btn-container { text-align: center; margin-top: 30px; margin-bottom: 50px; }
-        button { padding: 12px 35px; font-size: 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s; }
+        
+        /* 核心修復 2：將第八章與簽名欄死鎖在一起，防止單獨落頁 */
+        .sticky-footer-block { page-break-inside: avoid; margin-top: 20px; }
+        
+        .signature-table { margin-top: 15px; width: 100%; }
+        .signature-table td { width: 50%; padding: 15px; background: #fff; height: 160px; vertical-align: top; }
+        canvas { border: 1px dashed #999; background: #fcfcfc; cursor: crosshair; width: 100%; height: 100px; margin-top: 10px; }
+        
+        .btn-container { text-align: center; margin-top: 20px; margin-bottom: 30px; }
+        button { padding: 10px 30px; font-size: 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s; }
         .btn-clear { background-color: #f8f9fa; color: #666; border: 1px solid #ccc; margin-top: 8px; padding: 4px 12px; font-size: 12px; font-weight: normal; }
         .btn-clear:hover { background-color: #edd; color: #a00; border-color: #a00; }
         .btn-submit { background-color: #002d62; color: white; box-shadow: 0 4px 10px rgba(0,45,98,0.2); }
@@ -57,7 +66,7 @@
 <body>
 
 <div class="contract-wrapper" id="contract-content">
-    <h1>学术文献代印扫描服务同意书</h1>
+    <h1>学术文献代印掃描服务同意书</h1>
 
     <table>
         <tr>
@@ -90,17 +99,33 @@
         </tr>
     </table>
 
-    <h2>第一条 服务内容</h2>
-    <p>1.1 甲方委托乙方提供已发表的学术论文、期刊等文献的代印（印刷）及扫描服务。具体服务内容包括：</p>
-    <ul class="bullet-list">
-        <li>根据甲方提供的文献信息（如标题、作者、期刊名称、卷期、页码等），协助查找并获取指定文献；</li>
-        <li>根据甲方于本合约中选定之服务项目，提供相应之黑白印刷、彩色印刷或电子扫描服务；</li>
-        <li>将网页或扫描的电子文件（PDF格式）或实体印刷本透过指定方式交付给甲方。</li>
-    </ul>
-    <p>1.2 乙方应确保所提供的文献为已公开发表的合法内容，不涉及未公开的机密信息或侵权内容。</p>
-    <p>1.3 本服务为根据甲方要求专门定制的个性化商品，属于《中华人民共和国民法典》规定之承揽合同范畴，非通用现货产品。</p>
-
-    <h3>委托文献清单</h3>
+    <h2>第一章 服务内容与合同性质</h2>
+    <div class="clause-block">
+        <p class="clause-title">1.1 服务项目</p>
+        <p>甲方委托乙方提供已发表学术论文、期刊等文献的代印及扫描劳务服务。具体内容包括：</p>
+        <ul class="bullet-list">
+            <li>协助获取：根据甲方提供的文献信息（如标题、作者、期刊名称、卷期、页码等），提供代为查找及获取指定文献的劳务协助。</li>
+            <li>代工打印：依甲方具体指定要求（黑白/彩色、单面/双面等），对文献进行物理打印。</li>
+            <li>代工扫描：依甲方指定格式（包括但不限于PDF、JPG等），将实体文献转化为电子文件。扫描文件应保证清晰度不低于 300dpi，确保页面完整、无遮挡。若因扫描质量导致无法阅读，乙方应无偿重新扫描。</li>
+            <li>交付作业：将处理完成的电子文件或实体印刷本透过约定方式（邮件、云盘、微信等）交付甲方。</li>
+        </ul>
+    </div>
+    
+    <div class="clause-block">
+        <p class="clause-title">1.2 合同性质</p>
+        <ul class="bullet-list">
+            <li>本协议项下之服务，纯属基于甲方个性化要求而专门定制的物理加工与劳务承揽服务，绝非通用现货产品的买卖。</li>
+        </ul>
+    </div>
+    
+    <div class="clause-block">
+        <p class="clause-title">1.3 合法性审查</p>
+        <ul class="bullet-list">
+            <li>乙方应确保所协助获取的文献为已公开发表的合法内容，拒绝处理任何涉及国家机密、未公开或明显违法的侵权内容。</li>
+        </ul>
+    </div>
+    
+    <h3>第二章 委托文献清单</h3>
     <table>
         <thead>
             <tr>
@@ -140,9 +165,18 @@
         </tbody>
     </table>
 
-    <div class="fee-block">
-        <h2>第二条 服务费用及支付方式</h2>
-        <p>2.1 服务费用：根据委托之服务项目、页数及纸张规格等因素确定具体费用。系统联动单价标准如下（单次委托仅限单一类别计算）：</p>
+    <div>
+        <h2>第三章 服务费用及支付方式</h2>
+        <div class="clause-block">
+            <p class="clause-title">3.1 服务费用的绝对性质</p>
+            <p>甲乙双方明确知悉并同意：本合同项下甲方支付给乙方的所有款项，均系乙方因付出个人劳动、耗费时间、以及使用物理设备（如打印机、扫描仪、墨水、纸张等耗材）所收取的【人工与设备服务费】。该费用绝不包含任何文献内容的知识产权使用费、版权费或商业授权费。</p>
+        </div>
+        
+        <div class="clause-block">
+            <p class="clause-title">3.2 费用标准与确认</p>
+            <p>具体服务费用将根据文献的折算页数、打印规格、扫描要求等因素计算。具体总金额以双方于正式开始服务前，透过本合同或通讯软件（如微信等）确认的最终报价为准，该确认记录视为本合同之有效附件。系统联动单价标准如下（单次委托仅限单一类别计算）：</p>
+        </div>
+
         <table>
             <thead>
                 <tr>
@@ -182,28 +216,100 @@
             </tbody>
         </table>
 
-        <p>2.2 支付方式与计费规则：</p>
+        <div class="clause-block">
+            <p class="clause-title">3.3 支付节点</p>
+            <ul class="bullet-list">
+                <li>定金支付：甲方应在服务开始前 1 日内，向乙方支付服务费定金（<strong>总金额之 50%</strong>），金额为：人民币 <input type="text" style="width: 85px;" id="deposit-num" class="readonly-amount" readonly placeholder="自动计算"> 元（大写：人民币 <input type="text" style="width: 210px;" id="deposit-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）；后续可抵扣于全额款项内。</li>
+                <li><strong>服务费比例条款：本项目将依据委托项目之基础费用（总面数折算双面计费），每案固定额外加收 30% 的服务费用。</strong></li>
+                <li>尾款结清：甲方应在服务交付后 1 日内，通过上述相同方式向乙方结清剩余服务费全额。</li>
+                <li>本次服务总金额，共计人民币 <input type="text" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。（※ 此总金额已包含基础委托费及 30% 的额外服务费）</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>第四章 双方权利与义务</h2>
+    <div class="clause-block">
+        <p class="clause-title">4.1 甲方权利与义务</p>
         <ul class="bullet-list">
-            <li>甲方应在服务开始前 1 日内，向乙方支付服务费定金（<strong>总金额之 50%</strong>），金额为：人民币 <input type="text" style="width: 85px;" id="deposit-num" class="readonly-amount" readonly placeholder="自动计算"> 元（大写：人民币 <input type="text" style="width: 210px;" id="deposit-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）；后续可抵扣于全额款项内。</li>
-            <li><strong>服务费比例条款：本项目将依据委托项目之基础费用（总面数折算双面计费），每案固定额外加收 30% 的服务费用。</strong></li>
-            <li>甲方应在服务开始后 1 日内，支付包含 30% 服务费在内的全额款项：人民币 <input type="text" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。（※ 此总金额已包含基础委托费及 30% 的额外服务费）</li>
+            <li>严格限缩使用目的：甲方承诺，要求乙方处理之文献及交付的电子文件，仅限用于个人学习、学术研究、课堂教学等非商业性合理使用目的。绝对不得用于任何商业盈利、公开展览或侵犯他人知识产权之行为。</li>
+            <li>提供准确、完整的文献检索信息，并按本协议约定足额、按时支付劳务服务费。</li>
+            <li>有权要求乙方按约定规格交付成品，并对服务质量进行检验。</li>
         </ul>
     </div>
 
-    <h2>第三条 双方权利与义务</h2>
-    <p>3.1 甲方提供之文献及电子文件仅用于个人学习、研究等非商业目的，不得用于任何商业用途。</p>
-    <p>3.2 乙方应尽最大努力获取文献，若因故无法获取应及时通知并退还费用。</p>
+    <div class="clause-block">
+        <p class="clause-title">4.2 乙方权利与义务</p>
+        <ul class="bullet-list">
+            <li>有权依据付出的劳务与耗材成本，按约定收取服务费用。</li>
+            <li>应尽最大努力协助查找并处理甲方指定的文献。若因客观原因（文献绝版、系统限制等）导致服务无法完成，应及时通知甲方并无息退还尚未发生劳务部分之费用。</li>
+            <li>实体销毁义务：对服务过程中产生的任何过渡性纸质文献，乙方应在服务完成且交付后，依照甲方要求进行妥善处理（寄回甲方或进行物理销毁），不得私自留存。</li>
+        </ul>
+    </div>
 
-    <h2>第四条 知识产权与保密条款（非常重要）</h2>
-    <p>4.1 乙方仅提供代印、扫描服务，不享有任何知识产权。</p>
-    <p>4.2 双方对在服务过程中知悉的个人信息保密，期限为 3 年。</p>
-    <p>4.3 甲方承诺：相关内容仅基于个人研究所需，在不违反著作权法的情形下不侵犯任何第三方权益。</p>
-    <p>4.4 若因甲方引发侵权纠纷，全部法律责任由甲方独立承担。</p>
+    <h2>第五章 知识产权与免责条款</h2>
+    <div class="clause-block">
+        <p class="clause-title">5.1 知识产权归属</p>
+        <ul class="bullet-list">
+            <li>甲方委托乙方处理之所有文献，其著作权及相关知识产权均归原作者或原出版机构所有。乙方仅为代为操作打印机与扫描仪的“劳务代工者”，对文献内容不主张、不享有、也不转让任何知识产权。</li>
+        </ul>
+    </div>
+
+    <div class="clause-block">
+        <p class="clause-title">5.2 侵权免责与切断</p>
+        <ul class="bullet-list">
+            <li>甲方承诺其委托代印、扫描之行为符合《中华人民共和国著作权法》中关于“合理使用”之规定。若因甲方隐瞒商业目的、超范围使用或二次传播引发任何知识产权侵权纠纷，全部法律责任与经济赔偿均由甲方独立承担。 乙方作为仅收取微薄劳务费的技术服务方，对此不承担任何连带责任。</li>
+        </ul>
+    </div>
+
+    <div class="clause-block">
+        <p class="clause-title">5.3 阻却违法权</p>
+        <ul class="bullet-list">
+            <li>若乙方在服务过程中，合理怀疑甲方的委托行为存在侵权风险或违法可能，乙方有权立即单方面停止制作、解除合同，且对于乙方已付出的劳务成本，不予退款。</li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>第六章 违约责任</h2>
+        <div class="clause-block">
+            <p class="clause-title">6.1 甲方违约</p>
+            <ul class="bullet-list">
+                <li>若甲方未按时支付服务费用，每逾期一日，应按照未支付金额的 千分之五(5‰) 向乙方支付违约金。依据《中华人民共和国民法典》第七百八十七条之规定，甲方在承揽服务完成前虽有权单方解除合同，但必须全额赔偿乙方因此造成的直接与间接损失（含已投入之人力与耗材成本）。</li>
+            </ul>
+        </div>
+
+        <div class="clause-block">
+            <p class="clause-title">6.2 乙方违约</p>
+            <ul class="bullet-list">
+                <li>若乙方未按照约定提供服务，或交付成品严重不符合清晰度等质量要求且拒不重作的，应退还甲方对应部分之费用，并按照争议部分服务费用的 千分之五(5‰) 向甲方支付违约金。若因乙方重大过失导致甲方提供的非公开文献信息遭恶意泄露，乙方应承担相应法律责任并赔偿甲方实际损失。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="clause-block">
+        <h2>第七章 争议解决</h2>
+        <ul class="bullet-list">
+            <li>因本协议引起的或与本协议有关的任何争议，双方应秉持诚实信用原则通过友好协商解决；协商不成的，任何一方均有权向乙方（李怡萱）所在地有管辖权的人民法院提起诉讼。</li>
+        </ul>
+    </div>
 
     <div class="sticky-footer-block">
-        <h2>第五条 违约责任与争议解决</h2>
-        <p>5.1 若甲方未按时支付服务费用，每逾期一月，应按照未支付金额的千分之五向乙方支付违约金。</p>
-        <p>5.2 本协议引起的任何争议，双方应先尽力协商，协商不成时，双方均<strong>有权</strong>向<strong>乙方（李怡萱）所在地</strong>有管辖权的人民法院提起诉讼。</p>
+        <h2>第八章 其他条款</h2>
+        <div class="clause-block">
+            <p class="clause-title">8.1 生效与期限：</p>
+            <p>本协议自双方签字（或线上确认、盖章）之日起生效，有效期至服务全部完成且各项费用彻底结清之日止。</p>
+        </div>
+        <div class="clause-block">
+            <p class="clause-title">8.2 附件效力：</p>
+            <p>甲乙双方在微信、邮件等通讯软件上的沟通记录、确认报价单、排版要求等，均视为本合同不可分割之组成部分，与本合同正文具有同等法律效力。</p>
+        </div>
+        <div class="clause-block">
+            <p class="clause-title">8.3 文本份数：</p>
+            <p>本协议一式两份，甲乙双方各执一份。若采用电子合同形式签署，经双方电子签名或书面确认即具同等法律效力。</p>
+        </div>
+        <div class="clause-block">
+            <p class="clause-title">8.4 补充协议：</p>
+            <p>本协议未尽事宜，双方可另行签订补充协议。补充协议与本协议具有同等法律效力。</p>
+        </div>
 
         <table class="signature-table">
             <tr>
@@ -213,14 +319,14 @@
                     <div style="text-align: center;">
                         <button class="btn-clear" id="clear-btn" onclick="clearCanvas()">清除重签</button>
                     </div>
-                    <p style="margin-top:15px; margin-bottom:0;">日期：<span id="date-partyA"></span></p>
+                    <p style="margin-top:10px; margin-bottom:0;">日期：<span id="date-partyA"></span></p>
                 </td>
                 <td>
                     <strong>乙方 (签字盖章)</strong>
-                    <div style="font-family: 'SimSun', serif; font-size: 26px; color: #b30000; font-weight: bold; margin-top: 45px; margin-bottom: 40px; letter-spacing: 5px; text-align: center;">
+                    <div style="font-family: 'SimSun', serif; font-size: 26px; color: #b30000; font-weight: bold; margin-top: 35px; margin-bottom: 30px; letter-spacing: 5px; text-align: center;">
                         李怡萱
                     </div>
-                    <p style="margin-top:20px; margin-bottom:0;">日期：<span id="date-partyB"></span></p>
+                    <p style="margin-top:10px; margin-bottom:0;">日期：<span id="date-partyB"></span></p>
                 </td>
             </tr>
         </table>
@@ -264,7 +370,7 @@
     function calculatePrices() {
         try {
             const summaryPages = parseFloat(document.getElementById('doc-page-summary').value) || 0;
-            // 核心：在后台默默将总面数除以 2 换算成计费页数，UI 不显示折算栏位
+            // 大陆版核心：在后台默默将总面数除以 2 换算成计费页数
             const billingPages = Math.ceil(summaryPages / 2);
 
             const serviceType = document.getElementById('service-type').value;
@@ -309,7 +415,7 @@
         let totalPrice = 0;
         let depositPrice = 0;
         
-        // 核心：基础费用乘以 1.3 (+30%服务费)
+        // 大陆版核心：基础费用乘以 1.3 (+30%服务费)
         if (basePrice > 0 || pageCount > 0) {
             totalPrice = basePrice * 1.3;
             depositPrice = totalPrice * 0.5;
@@ -407,7 +513,7 @@
     ctx.strokeStyle = '#000'; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
     function resizeCanvas() {
         const rect = canvas.getBoundingClientRect();
-        canvas.width = rect.width; canvas.height = 110;
+        canvas.width = rect.width; canvas.height = 100;
         ctx.lineWidth = 2.5; ctx.lineCap = 'round';
     }
     window.addEventListener('resize', resizeCanvas);
@@ -461,18 +567,19 @@
 
         const element = document.getElementById('contract-content');
         
+        // 核心修改：移除 avoid-all，改用標準 css 控制，縮小 margin 讓版面往上移
         const opt = {
-            margin:       [15, 15, 22, 15], 
+            margin:       [10, 10, 15, 10], 
             filename:     `学术文献代印服务同意书_${nameA}.pdf`,
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { 
-                scale: 2.3,             
+                scale: 2,             
                 useCORS: true, 
                 scrollY: 0,
                 letterRendering: true   
             },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            pagebreak:    { mode: ['avoid-all', 'css'] } 
+            pagebreak:    { mode: 'css' } 
         };
 
         html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
@@ -481,7 +588,7 @@
                 pdf.setPage(i);
                 pdf.setFontSize(10);
                 pdf.setTextColor(110);
-                pdf.text('第 ' + i + ' 页，共计 ' + totalPages + ' 页', pdf.internal.pageSize.getWidth() / 2, pdf.internal.pageSize.getHeight() - 11, { align: 'center' });
+                pdf.text('第 ' + i + ' 页，共计 ' + totalPages + ' 页', pdf.internal.pageSize.getWidth() / 2, pdf.internal.pageSize.getHeight() - 8, { align: 'center' });
             }
         }).save().then(() => {
             originalStates.forEach(state => {
