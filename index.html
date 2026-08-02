@@ -11,14 +11,14 @@
             background-color: #f4f6f9;
             color: #333;
             line-height: 1.5;
-            padding: 15px; /* 縮減整體留白，使版面向上 */
+            padding: 15px;
             margin: 0;
         }
         .contract-wrapper {
             max-width: 790px;
             margin: 0 auto;
             background: #fff;
-            padding: 30px 40px; /* 縮減內距，使內容更緊湊 */
+            padding: 30px 40px;
             border-radius: 4px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             box-sizing: border-box;
@@ -30,12 +30,11 @@
         .bullet-list { padding-left: 20px; }
         .bullet-list li { margin-bottom: 4px; }
         
-        /* 核心修復 1：確保條文的小標題與內容不會被切斷 (防止如 5.3 斷裂) */
         .clause-block { page-break-inside: avoid; margin-bottom: 10px; }
         .clause-title { font-weight: bold; margin-bottom: 4px; color: #222; }
 
         table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-        tr { page-break-inside: avoid; } /* 防止表格行被切斷 */
+        tr { page-break-inside: avoid; }
         th, td { border: 1px solid #666; padding: 7px 10px; text-align: left; font-size: 13px; vertical-align: middle; }
         th { background-color: #f5f5f5; font-weight: bold; }
         .align-label { display: inline-block; width: 75px; text-align: justify; text-align-last: justify; margin-right: 8px; }
@@ -46,12 +45,11 @@
         .readonly-amount { background-color: #f8f9fa !important; color: #b30000; font-weight: bold; cursor: not-allowed; }
         .readonly-price { background-color: #f8f9fa !important; font-weight: bold; color: #333; text-align: center; }
         
-        /* 核心修復 2：將第八章與簽名欄死鎖在一起，防止單獨落頁 */
         .sticky-footer-block { page-break-inside: avoid; margin-top: 20px; }
         
         .signature-table { margin-top: 15px; width: 100%; }
         .signature-table td { width: 50%; padding: 15px; background: #fff; height: 160px; vertical-align: top; }
-        canvas { border: 1px dashed #999; background: #fcfcfc; cursor: crosshair; width: 100%; height: 100px; margin-top: 10px; }
+        canvas { border: 1px dashed #999; background: #fcfcfc; cursor: crosshair; width: 100%; height: 100px; margin-top: 10px; touch-action: none; }
         
         .btn-container { text-align: center; margin-top: 20px; margin-bottom: 30px; }
         button { padding: 10px 30px; font-size: 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s; }
@@ -104,24 +102,23 @@
         <p class="clause-title">1.1 服务项目</p>
         <p>甲方委托乙方提供已发表学术论文、期刊等文献的代印及扫描劳务服务。具体内容包括：</p>
         <ul class="bullet-list">
-            <li>协助获取：根据甲方提供的文献信息（如标题、作者、期刊名称、卷期、页码等），提供代为查找及获取指定文献的劳务协助。</li>
-            <li>代工打印：依甲方具体指定要求（黑白/彩色、单面/双面等），对文献进行物理打印。</li>
-            <li>代工扫描：依甲方指定格式（包括但不限于PDF、JPG等），将实体文献转化为电子文件。扫描文件应保证清晰度不低于 300dpi，确保页面完整、无遮挡。若因扫描质量导致无法阅读，乙方应无偿重新扫描。</li>
-            <li>交付作业：将处理完成的电子文件或实体印刷本透过约定方式（邮件、云盘、微信等）交付甲方。</li>
+            <li>协助获取：根据甲方提供的文献信息（如标题,作者,期刊名称,卷期,页码等）,提供代为查找及获取指定文献的劳务协助。</li>
+            <li>代工打印/扫描：依甲方具体指定要求（黑白/彩色打印、电子扫描等）,对文献进行物理加工。扫描文件应保证清晰度不低于 300dpi。</li>
+            <li>交付作业：将处理完成的电子文件或实体印刷本透过约定方式（邮件,云盘,微信等）交付甲方。</li>
         </ul>
     </div>
     
     <div class="clause-block">
         <p class="clause-title">1.2 合同性质</p>
         <ul class="bullet-list">
-            <li>本协议项下之服务，纯属基于甲方个性化要求而专门定制的物理加工与劳务承揽服务，绝非通用现货产品的买卖。</li>
+            <li>本协议项下之服务,纯属基于甲方个性化要求而专门定制的物理加工与劳务承揽服务,绝非通用现货产品的买卖。</li>
         </ul>
     </div>
     
     <div class="clause-block">
         <p class="clause-title">1.3 合法性审查</p>
         <ul class="bullet-list">
-            <li>乙方应确保所协助获取的文献为已公开发表的合法内容，拒绝处理任何涉及国家机密、未公开或明显违法的侵权内容。</li>
+            <li>乙方应确保所协助获取的文献为已公开发表的合法内容,拒绝处理任何涉及国家机密,未公开或明显违法的侵权内容。</li>
         </ul>
     </div>
     
@@ -159,7 +156,7 @@
                 <td><input type="number" id="doc-page-3" min="0" oninput="calculateCrossTableTotal()" placeholder="选填"></td>
             </tr>
             <tr style="background-color: #fafafa; font-weight: bold;">
-                <td colspan="4" style="text-align: right; color: #555;">跨文献委托合并总面数：</td>
+                <td colspan="4" style="text-align: right; color: #555;">跨文献委托合并总页数：</td>
                 <td><input type="text" id="doc-page-summary" class="readonly-price" style="color: #002d62;" readonly value="0"></td>
             </tr>
         </tbody>
@@ -169,49 +166,48 @@
         <h2>第三章 服务费用及支付方式</h2>
         <div class="clause-block">
             <p class="clause-title">3.1 服务费用的绝对性质</p>
-            <p>甲乙双方明确知悉并同意：本合同项下甲方支付给乙方的所有款项，均系乙方因付出个人劳动、耗费时间、以及使用物理设备（如打印机、扫描仪、墨水、纸张等耗材）所收取的【人工与设备服务费】。该费用绝不包含任何文献内容的知识产权使用费、版权费或商业授权费。</p>
+            <p>甲乙双方明确知悉并同意：本合同项下甲方支付给乙方的所有款项,均系乙方因付出个人劳动,耗费时间,以及使用物理设备（如打印机,扫描仪,墨水,纸张等耗材）所收取的【人工与设备服务费】。该费用绝不包含任何文献内容的知识产权使用费,版权费或商业授权费。</p>
         </div>
         
         <div class="clause-block">
-            <p class="clause-title">3.2 费用标准与确认</p>
-            <p>具体服务费用将根据文献的折算页数、打印规格、扫描要求等因素计算。具体总金额以双方于正式开始服务前，透过本合同或通讯软件（如微信等）确认的最终报价为准，该确认记录视为本合同之有效附件。系统联动单价标准如下（单次委托仅限单一类别计算）：</p>
+            <p class="clause-title">3.2 费用标准与计算规则</p>
+            <p>具体服务费用标准如下（本项计费金额为纯基础费用，未含30%服务费，且精准保留至小数点第二位）。另可依需求勾选非必选项目「文献调阅费：¥30.00/次（此项固定收费，不参与30%服务费加收）」。系统联动显示标准如下：</p>
         </div>
 
         <table>
             <thead>
                 <tr>
-                    <th style="width:30%;">委托服务项目</th>
-                    <th style="width:20%;">纸张/交付规格</th>
-                    <th style="width:15%;">印刷型态</th>
-                    <th style="width:15%;">自动单价</th>
-                    <th style="width:20%;">本项计费总金额</th>
+                    <th style="width:40%;">委托服务项目</th>
+                    <th style="width:30%;">纸张/交付规格</th>
+                    <th style="width:30%;">本项基础计费金额</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        <select id="service-type" onchange="calculatePrices()" style="font-weight: bold; color: #002d62;">
-                            <option value="bw" selected>委托：黑白印刷</option>
-                            <option value="color">委托：彩色印刷</option>
-                            <option value="scan">委托：电子扫描 (PDF)</option>
+                        <select id="service-type" onchange="calculateCrossTableTotal()" style="font-weight: bold; color: #002d62;">
+                            <option value="scan" selected>委托：电子扫描 (阶梯计费)</option>
+                            <option value="bw">委托：黑白影印 (¥2.00/页)</option>
+                            <option value="color">委托：彩色影印 (¥4.00/页)</option>
                             <option value="none">不需任何服务</option>
                         </select>
                     </td>
                     <td>
-                        <select id="size-print" onchange="calculatePrices()">
+                        <select id="size-print" onchange="calculateCrossTableTotal()">
                             <option value="A4" selected>A4</option>
                             <option value="B4">B4</option>
                             <option value="A3">A3</option>
                         </select>
                     </td>
-                    <td>
-                        <select id="type-print">
-                            <option value="single">单面印刷</option>
-                            <option value="double">双面印刷</option>
-                        </select>
+                    <td><input type="text" id="total-item-price" class="readonly-price" readonly placeholder="请输入页数"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="background-color: #fafafa;">
+                        <label style="cursor: pointer; font-weight: normal; display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="archive-fee-check" onchange="calculateCrossTableTotal()" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span><strong>非必选项目：文献调阅费</strong>（如需协助深度查找/特殊调阅，每次加收 ¥30.00，不另计30%服务费）</span>
+                        </label>
                     </td>
-                    <td><input type="text" id="price-display" class="readonly-price" readonly value="2.0 元/页"></td>
-                    <td><input type="text" id="total-item-price" class="readonly-price" readonly value="0.0 元"></td>
                 </tr>
             </tbody>
         </table>
@@ -219,10 +215,10 @@
         <div class="clause-block">
             <p class="clause-title">3.3 支付节点</p>
             <ul class="bullet-list">
-                <li>定金支付：甲方应在服务开始前 1 日内，向乙方支付服务费定金（<strong>总金额之 50%</strong>），金额为：人民币 <input type="text" style="width: 85px;" id="deposit-num" class="readonly-amount" readonly placeholder="自动计算"> 元（大写：人民币 <input type="text" style="width: 210px;" id="deposit-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）；后续可抵扣于全额款项内。</li>
-                <li><strong>服务费比例条款：本项目将依据委托项目之基础费用（总面数折算双面计费），每案固定额外加收 30% 的服务费用。</strong></li>
-                <li>尾款结清：甲方应在服务交付后 1 日内，通过上述相同方式向乙方结清剩余服务费全额。</li>
-                <li>本次服务总金额，共计人民币 <input type="text" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。（※ 此总金额已包含基础委托费及 30% 的额外服务费）</li>
+                <li>定金支付：甲方应在服务开始前 1 日内,向乙方支付服务费定金（<strong>总金額之 50%</strong>）,金额为：人民币 <input type="text" style="width: 85px;" id="deposit-num" class="readonly-amount" readonly placeholder="自动计算"> 元（大写：人民币 <input type="text" style="width: 210px;" id="deposit-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）；后续可抵扣于全额款项内。</li>
+                <li><strong>3.3项服务费结算说明：总金額計算方式為「(影印/掃描基礎費用 × 1.3) + 文獻調閱費(若有勾選，不另計30%服務費)」，結算出最終總金額與定金。</strong></li>
+                <li>尾款结清：甲方应在服务交付后 1 日内,通过上述相同方式向乙方结清剩余服务费全额。</li>
+                <li>本次服务总金额（含服务费与調閱費）,共计人民币 <input type="text" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。</li>
             </ul>
         </div>
     </div>
@@ -231,18 +227,17 @@
     <div class="clause-block">
         <p class="clause-title">4.1 甲方权利与义务</p>
         <ul class="bullet-list">
-            <li>严格限缩使用目的：甲方承诺，要求乙方处理之文献及交付的电子文件，仅限用于个人学习、学术研究、课堂教学等非商业性合理使用目的。绝对不得用于任何商业盈利、公开展览或侵犯他人知识产权之行为。</li>
-            <li>提供准确、完整的文献检索信息，并按本协议约定足额、按时支付劳务服务费。</li>
-            <li>有权要求乙方按约定规格交付成品，并对服务质量进行检验。</li>
+            <li>严格限缩使用目的：甲方承诺,要求乙方处理之文献及交付的电子文件,仅限用于个人学习,学术研究,课堂教学等非商业性合理使用目的。绝对不得用于任何商业盈利,公开展览或侵犯他人知识产权之行为。</li>
+            <li>提供准确,完整的文献检索信息,并按本协议约定足额,按时支付劳务服务费。</li>
+            <li>有权要求乙方按约定规格交付成品,并对服务质量进行检验。</li>
         </ul>
     </div>
 
     <div class="clause-block">
         <p class="clause-title">4.2 乙方权利与义务</p>
         <ul class="bullet-list">
-            <li>有权依据付出的劳务与耗材成本，按约定收取服务费用。</li>
-            <li>应尽最大努力协助查找并处理甲方指定的文献。若因客观原因（文献绝版、系统限制等）导致服务无法完成，应及时通知甲方并无息退还尚未发生劳务部分之费用。</li>
-            <li>实体销毁义务：对服务过程中产生的任何过渡性纸质文献，乙方应在服务完成且交付后，依照甲方要求进行妥善处理（寄回甲方或进行物理销毁），不得私自留存。</li>
+            <li>有权依据付出的劳务与耗材成本,按约定收取服务费用。</li>
+            <li>应尽最大努力协助查找并处理甲方指定的文献。若因客观原因（文献绝版,系统限制等）导致服务无法完成,应及时通知甲方并无息退还尚未发生劳务部分之费用。</li>
         </ul>
     </div>
 
@@ -250,21 +245,21 @@
     <div class="clause-block">
         <p class="clause-title">5.1 知识产权归属</p>
         <ul class="bullet-list">
-            <li>甲方委托乙方处理之所有文献，其著作权及相关知识产权均归原作者或原出版机构所有。乙方仅为代为操作打印机与扫描仪的“劳务代工者”，对文献内容不主张、不享有、也不转让任何知识产权。</li>
+            <li>甲方委托乙方处理之所有文献,其著作权及相关知识产权均归原作者或原出版机构所有。乙方仅为代为操作打印机与扫描仪的“劳务代工者”,对文献内容不主张,不享有,也不转让任何知识产权。</li>
         </ul>
     </div>
 
     <div class="clause-block">
         <p class="clause-title">5.2 侵权免责与切断</p>
         <ul class="bullet-list">
-            <li>甲方承诺其委托代印、扫描之行为符合《中华人民共和国著作权法》中关于“合理使用”之规定。若因甲方隐瞒商业目的、超范围使用或二次传播引发任何知识产权侵权纠纷，全部法律责任与经济赔偿均由甲方独立承担。 乙方作为仅收取微薄劳务费的技术服务方，对此不承担任何连带责任。</li>
+            <li>甲方承诺其委托代印、扫描之行为符合《中华人民共和国著作权法》中关于“合理使用”之规定。若因甲方隐瞒商业目的,超范围使用或二次传播引发任何知识产权侵权纠纷,全部法律责任与经济赔偿均由甲方独立承担。 乙方作为仅收取微薄劳务费的技术服务方,对此不承担任何连带责任。</li>
         </ul>
     </div>
 
     <div class="clause-block">
         <p class="clause-title">5.3 阻却违法权</p>
         <ul class="bullet-list">
-            <li>若乙方在服务过程中，合理怀疑甲方的委托行为存在侵权风险或违法可能，乙方有权立即单方面停止制作、解除合同，且对于乙方已付出的劳务成本，不予退款。</li>
+            <li>若乙方在服务过程中,合理怀疑甲方的委托行为存在侵权风险或违法可能,乙方有权立即单方面停止制作,解除合同,且对于乙方已付出的劳务成本,不予退款。</li>
         </ul>
     </div>
 
@@ -273,14 +268,14 @@
         <div class="clause-block">
             <p class="clause-title">6.1 甲方违约</p>
             <ul class="bullet-list">
-                <li>若甲方未按时支付服务费用，每逾期一日，应按照未支付金额的 千分之五(5‰) 向乙方支付违约金。依据《中华人民共和国民法典》第七百八十七条之规定，甲方在承揽服务完成前虽有权单方解除合同，但必须全额赔偿乙方因此造成的直接与间接损失（含已投入之人力与耗材成本）。</li>
+                <li>若甲方未按时支付服务费用,每逾期一日,应按照未支付金额的 千分之五(5‰) 向乙方支付违约金。依据《中华人民共和国民法典》第七百八十七条之规定,甲方在承揽服务完成前虽有权单方解除合同,但必须全额赔偿乙方因此造成的直接与间接损失。</li>
             </ul>
         </div>
 
         <div class="clause-block">
             <p class="clause-title">6.2 乙方违约</p>
             <ul class="bullet-list">
-                <li>若乙方未按照约定提供服务，或交付成品严重不符合清晰度等质量要求且拒不重作的，应退还甲方对应部分之费用，并按照争议部分服务费用的 千分之五(5‰) 向甲方支付违约金。若因乙方重大过失导致甲方提供的非公开文献信息遭恶意泄露，乙方应承担相应法律责任并赔偿甲方实际损失。</li>
+                <li>若乙方未按照约定提供服务,或交付成品严重不符合清晰度等质量要求且拒不重作的,应退还甲方对应部分之费用,并按照争议部分服务费用的 千分之五(5‰) 向乙方支付违约金。若因乙方重大过失导致甲方提供的非公开文献信息遭恶意泄露,乙方应承担相应法律责任并赔偿甲方实际损失。</li>
             </ul>
         </div>
     </div>
@@ -288,7 +283,7 @@
     <div class="clause-block">
         <h2>第七章 争议解决</h2>
         <ul class="bullet-list">
-            <li>因本协议引起的或与本协议有关的任何争议，双方应秉持诚实信用原则通过友好协商解决；协商不成的，任何一方均有权向乙方（李怡萱）所在地有管辖权的人民法院提起诉讼。</li>
+            <li>因本协议引起的或与本协议有关的任何争议,双方应秉持诚实信用原则通过友好协商解决；协商不成的,任何一方均有权向乙方（李怡萱）所在地有管辖权的人民法院提起訴訟。</li>
         </ul>
     </div>
 
@@ -296,19 +291,19 @@
         <h2>第八章 其他条款</h2>
         <div class="clause-block">
             <p class="clause-title">8.1 生效与期限：</p>
-            <p>本协议自双方签字（或线上确认、盖章）之日起生效，有效期至服务全部完成且各项费用彻底结清之日止。</p>
+            <p>本协议自双方签字（或线上确认,盖章）之日起生效,有效期至服务全部完成且各项费用彻底结清之日止。</p>
         </div>
         <div class="clause-block">
             <p class="clause-title">8.2 附件效力：</p>
-            <p>甲乙双方在微信、邮件等通讯软件上的沟通记录、确认报价单、排版要求等，均视为本合同不可分割之组成部分，与本合同正文具有同等法律效力。</p>
+            <p>甲乙双方在微信,邮件等通讯软件上的沟通记录,确认报价單,排版要求等,均视为本合同不可分割之组成部分,与本合同正文具有同等法律效力。</p>
         </div>
         <div class="clause-block">
             <p class="clause-title">8.3 文本份数：</p>
-            <p>本协议一式两份，甲乙双方各执一份。若采用电子合同形式签署，经双方电子签名或书面确认即具同等法律效力。</p>
+            <p>本协议一式两份,甲乙双方各执一份。若采用电子合同形式签署,经双方电子签名或书面确认即具同等法律效力。</p>
         </div>
         <div class="clause-block">
             <p class="clause-title">8.4 补充协议：</p>
-            <p>本协议未尽事宜，双方可另行签订补充协议。补充协议与本协议具有同等法律效力。</p>
+            <p>本协议未尽事宜,双方可另行签订补充协议。补充协议与本协议具有同等法律效力。</p>
         </div>
 
         <table class="signature-table">
@@ -338,89 +333,70 @@
 </div>
 
 <script>
-    window.addEventListener('DOMContentLoaded', () => {
-        try {
-            const today = new Date();
-            const dateString = `${today.getFullYear()} 年 ${today.getMonth() + 1} 月 ${today.getDate()} 日`;
-            document.getElementById('date-partyA').innerText = dateString;
-            document.getElementById('date-partyB').innerText = dateString;
-            calculateCrossTableTotal();
-        } catch(e) {
-            console.error("Initialization Error:", e);
-        }
+    document.addEventListener('DOMContentLoaded', () => {
+        const today = new Date();
+        const dateString = `${today.getFullYear()} 年 ${today.getMonth() + 1} 月 ${today.getDate()} 日`;
+        document.getElementById('date-partyA').innerText = dateString;
+        document.getElementById('date-partyB').innerText = dateString;
+        calculateCrossTableTotal();
+        initCanvas();
     });
 
-    let currentUnitPrice = 2.0;
-
     function calculateCrossTableTotal() {
-        try {
-            const p1 = parseFloat(document.getElementById('doc-page-1').value) || 0;
-            const p2 = parseFloat(document.getElementById('doc-page-2').value) || 0;
-            const p3 = parseFloat(document.getElementById('doc-page-3').value) || 0;
-
-            const totalCombinedPages = p1 + p2 + p3;
-            document.getElementById('doc-page-summary').value = totalCombinedPages;
-
-            calculatePrices();
-        } catch (e) {
-            console.error("Calculation Error:", e);
-        }
-    }
-
-    function calculatePrices() {
-        try {
-            const summaryPages = parseFloat(document.getElementById('doc-page-summary').value) || 0;
-            // 大陆版核心：在后台默默将总面数除以 2 换算成计费页数
-            const billingPages = Math.ceil(summaryPages / 2);
-
-            const serviceType = document.getElementById('service-type').value;
-            const sizePrint = document.getElementById('size-print').value;
-            
-            const priceDisplay = document.getElementById('price-display');
-            const itemTotalDisplay = document.getElementById('total-item-price');
-            const sizeSelect = document.getElementById('size-print');
-            const typeSelect = document.getElementById('type-print');
-
-            // 大陆版单价判定逻辑
-            if (serviceType === 'none') {
-                currentUnitPrice = 0.0;
-                sizeSelect.disabled = false;
-                typeSelect.disabled = false;
-            } else if (serviceType === 'bw') {
-                sizeSelect.disabled = false;
-                typeSelect.disabled = false;
-                currentUnitPrice = 2.0; 
-            } else if (serviceType === 'color') {
-                sizeSelect.disabled = false;
-                typeSelect.disabled = false;
-                currentUnitPrice = 4.0; 
-            } else if (serviceType === 'scan') {
-                currentUnitPrice = 1.5;
-                sizeSelect.disabled = true;
-                typeSelect.disabled = true;
-            }
-
-            priceDisplay.value = currentUnitPrice.toFixed(1) + " 元/页";
-            
-            const itemTotal = currentUnitPrice * billingPages;
-            itemTotalDisplay.value = itemTotal.toFixed(2) + " 元";
-            
-            autoSumBudget(itemTotal, summaryPages);
-        } catch (e) {
-            console.error("Price logic Error:", e);
-        }
-    }
-
-    function autoSumBudget(basePrice, pageCount) {
-        let totalPrice = 0;
-        let depositPrice = 0;
+        const p1 = parseFloat(document.getElementById('doc-page-1').value) || 0;
+        const p2 = parseFloat(document.getElementById('doc-page-2').value) || 0;
+        const p3 = parseFloat(document.getElementById('doc-page-3').value) || 0;
+        const totalCombinedPages = p1 + p2 + p3;
         
-        // 大陆版核心：基础费用乘以 1.3 (+30%服务费)
-        if (basePrice > 0 || pageCount > 0) {
-            totalPrice = basePrice * 1.3;
-            depositPrice = totalPrice * 0.5;
+        document.getElementById('doc-page-summary').value = totalCombinedPages;
+        calculatePrices(totalCombinedPages);
+    }
+
+    function calculatePrices(pages) {
+        const serviceType = document.getElementById('service-type').value;
+        const itemTotalDisplay = document.getElementById('total-item-price');
+        const isArchiveChecked = document.getElementById('archive-fee-check').checked;
+
+        // 若完全未輸入頁數且未勾選調閱費，或選擇不需服務，則清空 3.2 與 3.3 金額
+        if ((pages === 0 && !isArchiveChecked) || serviceType === 'none') {
+            itemTotalDisplay.value = "";
+            itemTotalDisplay.placeholder = "请输入页数";
+            updateBudget(0);
+            return;
         }
 
+        let baseServiceTotal = 0; // 僅影印/掃描服務費
+
+        if (serviceType === 'bw') {
+            baseServiceTotal = pages * 2.0;
+        } else if (serviceType === 'color') {
+            baseServiceTotal = pages * 4.0;
+        } else if (serviceType === 'scan') {
+            if (pages > 0) {
+                if (pages < 35) {
+                    baseServiceTotal = 50.0;
+                } else if (pages >= 35 && pages <= 99) {
+                    baseServiceTotal = pages * 1.5;
+                } else if (pages >= 100 && pages <= 499) {
+                    baseServiceTotal = pages * 1.0;
+                } else if (pages >= 500) {
+                    baseServiceTotal = pages * 0.8;
+                }
+            }
+        }
+
+        let archiveFee = isArchiveChecked ? 30.0 : 0.0;
+
+        // 若頁數為 0 且僅勾選調閱費，基礎價就等於調閱費
+        const displayBaseTotal = baseServiceTotal + archiveFee;
+        itemTotalDisplay.value = displayBaseTotal.toFixed(2) + " 元";
+        
+        // 3.3 項總金額：(服務費 × 1.3) + 調閱費(不參與30%服務費)
+        const finalTotal = (baseServiceTotal * 1.3) + archiveFee;
+        updateBudget(finalTotal);
+    }
+
+    function updateBudget(totalPrice) {
         const numInput = document.getElementById('total-num');
         const wordInput = document.getElementById('total-word');
         const depositNumInput = document.getElementById('deposit-num');
@@ -434,6 +410,7 @@
             return;
         }
 
+        const depositPrice = totalPrice * 0.5;
         numInput.value = totalPrice.toFixed(2);
         wordInput.value = numberToChineseCN(totalPrice);
         
@@ -450,22 +427,11 @@
         const cnInteger = '整';
         const cnIntLast = '元';
 
-        let integerNum; 
-        let decimalNum; 
+        let moneyStr = money.toFixed(2);
+        let parts = moneyStr.split('.');
+        let integerNum = parts[0];
+        let decimalNum = parts[1];
         let chineseStr = ''; 
-
-        money = Math.round(money * 100) / 100; 
-        let moneyStr = money.toString();
-        
-        if (moneyStr.indexOf('.') === -1) {
-            integerNum = moneyStr;
-            decimalNum = '';
-        } else {
-            let parts = moneyStr.split('.');
-            integerNum = parts[0];
-            decimalNum = parts[1].substring(0, 2);
-            if (decimalNum.length === 1) decimalNum += '0';
-        }
 
         if (parseInt(integerNum, 10) > 0) {
             let zeroCount = 0;
@@ -487,49 +453,83 @@
             chineseStr += cnIntLast;
         }
 
-        if (decimalNum !== '') {
-            let decLen = decimalNum.length;
-            for (let i = 0; i < decLen; i++) {
-                let n = decimalNum.substr(i, 1);
-                if (n !== '0') {
-                    chineseStr += cnNums[Number(n)] + cnDecUnits[i];
-                } else if (i === 0 && parseInt(integerNum, 10) > 0 && decimalNum.substr(1, 1) !== '0') {
-                    chineseStr += cnNums[0]; 
-                }
+        if (decimalNum !== '00') {
+            let n1 = decimalNum.substr(0, 1);
+            let n2 = decimalNum.substr(1, 1);
+            if (n1 !== '0') {
+                chineseStr += cnNums[Number(n1)] + cnDecUnits[0];
+            } else if (parseInt(integerNum, 10) > 0) {
+                chineseStr += cnNums[0];
+            }
+            if (n2 !== '0') {
+                chineseStr += cnNums[Number(n2)] + cnDecUnits[1];
             }
         }
 
         if (chineseStr === '') {
             chineseStr += cnNums[0] + cnIntLast + cnInteger;
-        } else if (decimalNum === '' || decimalNum === '00') {
+        } else if (decimalNum === '00') {
             chineseStr += cnInteger;
         }
         return chineseStr;
     }
 
-    const canvas = document.getElementById('canvas-partyA');
-    const ctx = canvas.getContext('2d');
-    let isDrawing = false;
-    ctx.strokeStyle = '#000'; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+    let canvas, ctx, isDrawing = false;
+    function initCanvas() {
+        canvas = document.getElementById('canvas-partyA');
+        ctx = canvas.getContext('2d');
+        resizeCanvas();
+
+        window.addEventListener('resize', resizeCanvas);
+
+        const getPos = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: clientX - rect.left, y: clientY - rect.top };
+        };
+
+        const startDraw = (e) => {
+            isDrawing = true;
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            e.preventDefault();
+        };
+
+        const draw = (e) => {
+            if (!isDrawing) return;
+            const pos = getPos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            e.preventDefault();
+        };
+
+        const stopDraw = () => { isDrawing = false; };
+
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDraw);
+        canvas.addEventListener('touchstart', startDraw, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        canvas.addEventListener('touchend', stopDraw);
+    }
+
     function resizeCanvas() {
+        if (!canvas) return;
         const rect = canvas.getBoundingClientRect();
-        canvas.width = rect.width; canvas.height = 100;
-        ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+        canvas.width = rect.width;
+        canvas.height = 100;
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = 'round';
     }
-    window.addEventListener('resize', resizeCanvas);
-    setTimeout(resizeCanvas, 300);
-    function getPos(e) {
-        const rect = canvas.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        return { x: clientX - rect.left, y: clientY - rect.top };
+
+    function clearCanvas() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
     }
-    function startDraw(e) { isDrawing = true; const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); e.preventDefault(); }
-    function draw(e) { if (!isDrawing) return; const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); e.preventDefault(); }
-    function stopDraw() { isDrawing = false; }
-    canvas.addEventListener('mousedown', startDraw); canvas.addEventListener('mousemove', draw); canvas.addEventListener('mouseup', stopDraw);
-    canvas.addEventListener('touchstart', startDraw); canvas.addEventListener('touchmove', draw); canvas.addEventListener('touchend', stopDraw);
-    function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
     function generatePDF() {
         const nameA = document.getElementById('partyA-name').value.trim();
@@ -539,12 +539,12 @@
         const docName1 = document.getElementById('doc-name-1').value.trim();
         const docPage1 = parseFloat(document.getElementById('doc-page-1').value) || 0;
 
-        if (!nameA) { alert('请填写甲方“甲方姓名”，此为必填写字段。'); return; }
-        if (!phoneA) { alert('请填写甲方“联系电话”，此为必填写字段。'); return; }
-        if (!emailA) { alert('请填写甲方“电子邮箱”，此为必填写字段。'); return; }
-        if (!nicknameA) { alert('请填写甲方“平台昵称”，此为必填写字段。'); return; }
-        if (!docName1) { alert('请至少填写第一本“文献名称”，作为主要的委托标的。'); return; }
-        if (docPage1 <= 0) { alert('请填写第一本“文献页数”，作为合并算费的基础。'); return; }
+        if (!nameA) { alert('请填写甲方“甲方姓名”,此为必填写字段。'); return; }
+        if (!phoneA) { alert('请填写甲方“联系电话”,此为必填写字段。'); return; }
+        if (!emailA) { alert('请填写甲方“电子邮箱”,此为必填写字段。'); return; }
+        if (!nicknameA) { alert('请填写甲方“平台昵称”,此为必填写字段。'); return; }
+        if (!docName1) { alert('请至少填写第一本“文献名称”,作为主要的委托标的。'); return; }
+        if (docPage1 <= 0) { alert('请填写第一本“文献页数”,作为合并算费的基础。'); return; }
 
         document.getElementById('clear-btn').style.display = 'none';
 
@@ -558,7 +558,7 @@
                 textValue = selectedOption ? selectedOption.text : input.value;
             }
 
-            originalStates.push({ parent: input.parentNode, sibling: input.nextSibling, inputNode: input });
+            originalStates.push({ parent: input.parentNode, inputNode: input });
             const span = document.createElement('span');
             span.className = 'pdf-replacement';
             span.innerText = textValue || ' '; 
@@ -566,18 +566,11 @@
         });
 
         const element = document.getElementById('contract-content');
-        
-        // 核心修改：移除 avoid-all，改用標準 css 控制，縮小 margin 讓版面往上移
         const opt = {
             margin:       [10, 10, 15, 10], 
             filename:     `学术文献代印服务同意书_${nameA}.pdf`,
             image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { 
-                scale: 2,             
-                useCORS: true, 
-                scrollY: 0,
-                letterRendering: true   
-            },
+            html2canvas:  { scale: 2, useCORS: true, scrollY: 0, letterRendering: true },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
             pagebreak:    { mode: 'css' } 
         };
@@ -596,7 +589,7 @@
                 if (replacement) state.parent.replaceChild(state.inputNode, replacement);
             });
             document.getElementById('clear-btn').style.display = 'inline-block';
-            calculateCrossTableTotal();
+            resizeCanvas();
         }).catch(err => {
             console.error("PDF生成失败：", err);
             window.location.reload();
