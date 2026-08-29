@@ -6,6 +6,8 @@
     <title>学术文献代印掃描服务同意书</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
             background-color: #f4f6f9;
@@ -100,10 +102,10 @@
     <h2>第一章 服务内容与合同性质</h2>
     <div class="clause-block">
         <p class="clause-title">1.1 服务项目</p>
-        <p>甲方委托乙方提供已发表学术论文、期刊等文献的代印及扫描劳务服务。具体内容包括：</p>
+        <p>甲方委托乙方提供已发表学术论文、期刊等文献的代印、扫描及纯文献下载劳务服务。具体内容包括：</p>
         <ul class="bullet-list">
             <li>协助获取：根据甲方提供的文献信息（如标题,作者,期刊名称,卷期,页码等）,提供代为查找及获取指定文献的劳务协助。</li>
-            <li>代工打印/扫描：依甲方具体指定要求（黑白/彩色打印、电子扫描等）,对文献进行物理加工。扫描文件应保证清晰度不低于 300dpi。</li>
+            <li>代工打印/扫描/下载：依甲方具体指定要求（黑白/彩色打印、电子扫描、纯电子文献下载等）,对文献进行物理加工或數位交付。</li>
             <li>交付作业：将处理完成的电子文件或实体印刷本透过约定方式（邮件,云盘,微信等）交付甲方。</li>
         </ul>
     </div>
@@ -166,18 +168,18 @@
         <h2>第三章 服务费用及支付方式</h2>
         <div class="clause-block">
             <p class="clause-title">3.1 服务费用的绝对性质</p>
-            <p>甲乙双方明确知悉并同意：本合同项下甲方支付给乙方的所有款项,均系乙方因付出个人劳动,耗费时间,以及使用物理设备（如打印机,扫描仪,墨水,纸张等耗材）所收取的【人工与设备服务费】。该费用绝不包含任何文献内容的知识产权使用费,版权费或商业授权费。</p>
+            <p>甲乙双方明确知悉并同意：本合同项下甲方支付给乙方的所有款项,均系乙方因付出个人劳动,耗费时间,以及使用物理设备（如打印机,扫描仪,电脑等耗材）所收取的【人工与设备服务费】。该费用绝不包含任何文献内容的知识产权使用费,版权费或商业授权费。</p>
         </div>
         
         <div class="clause-block">
-            <p class="clause-title">3.2 费用标准与计算规则</p>
-            <p>具体服务费用标准如下（本项计费金额为纯基础费用，未含30%服务费，且精准保留至小数点第二位）。另可依需求勾选非必选项目「文献调阅费：¥30.00/次（此项固定收费，不参与30%服务费加收）」。系统联动显示标准如下：</p>
+            <p class="clause-title">3.2 费用计算</p>
+            <p>具体服务费用如下：另如需加急可勾选「24小时加急费用（加收总金额的 15%）」。</p>
         </div>
 
         <table>
             <thead>
                 <tr>
-                    <th style="width:40%;">委托服务项目</th>
+                    <th style="width:40%;">服务项目</th>
                     <th style="width:30%;">纸张/交付规格</th>
                     <th style="width:30%;">本项基础计费金额</th>
                 </tr>
@@ -186,9 +188,11 @@
                 <tr>
                     <td>
                         <select id="service-type" onchange="calculateCrossTableTotal()" style="font-weight: bold; color: #002d62;">
-                            <option value="scan" selected>委托：电子扫描 (阶梯计费)</option>
-                            <option value="bw">委托：黑白影印 (¥2.00/页)</option>
-                            <option value="color">委托：彩色影印 (¥4.00/页)</option>
+                            <option value="scan" selected>电子扫描 (阶梯计费)</option>
+                            <option value="bw">黑白影印 (¥2.00/页)</option>
+                            <option value="color">彩色影印 (¥4.00/页)</option>
+                            <option value="download-single">纯文献下载 (单篇下载 ¥50)</option>
+                            <option value="download-multi">纯文献下载 (不限篇数 ¥100)</option>
                             <option value="none">不需任何服务</option>
                         </select>
                     </td>
@@ -199,13 +203,13 @@
                             <option value="A3">A3</option>
                         </select>
                     </td>
-                    <td><input type="text" id="total-item-price" class="readonly-price" readonly placeholder="请输入页数"></td>
+                    <td><input type="text" id="total-item-price" class="readonly-price" readonly placeholder="请选择服务"></td>
                 </tr>
                 <tr>
                     <td colspan="3" style="background-color: #fafafa;">
                         <label style="cursor: pointer; font-weight: normal; display: flex; align-items: center; gap: 8px;">
-                            <input type="checkbox" id="archive-fee-check" onchange="calculateCrossTableTotal()" style="width: 18px; height: 18px; cursor: pointer;">
-                            <span><strong>非必选项目：文献调阅费</strong>（如需协助深度查找/特殊调阅，每次加收 ¥30.00，不另计30%服务费）</span>
+                            <input type="checkbox" id="urgent-fee-check" onchange="calculateCrossTableTotal()" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span><strong>非必选项目：24小时加急费用</strong>（如需24小时内优先急件处理，加收总金额的 15%）</span>
                         </label>
                     </td>
                 </tr>
@@ -216,9 +220,9 @@
             <p class="clause-title">3.3 支付节点</p>
             <ul class="bullet-list">
                 <li>定金支付：甲方应在服务开始前 1 日内,向乙方支付服务费定金（<strong>总金額之 50%</strong>）,金额为：人民币 <input type="text" style="width: 85px;" id="deposit-num" class="readonly-amount" readonly placeholder="自动计算"> 元（大写：人民币 <input type="text" style="width: 210px;" id="deposit-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）；后续可抵扣于全额款项内。</li>
-                <li><strong>3.3项服务费结算说明：总金額計算方式為「(影印/掃描基礎費用 × 1.3) + 文獻調閱費(若有勾選，不另計30%服務費)」，結算出最終總金額與定金。</strong></li>
+                <li><strong>3.3项服务费结算说明：扫描项目加收30%服务费；下载项目固定收费不加收服务费；所有项目若勾選加急則總額再加收15%。</strong></li>
                 <li>尾款结清：甲方应在服务交付后 1 日内,通过上述相同方式向乙方结清剩余服务费全额。</li>
-                <li>本次服务总金额（含服务费与調閱費）,共计人民币 <input type="text" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。</li>
+                <li>本次服务总金额（含服务费與加急費）,共计人民币 <input type="text" style="width: 85px; " id="total-num" class="readonly-amount" readonly placeholder="自动计算总价"> 元（大写：人民币 <input type="text" style="width: 210px; " id="total-word" class="readonly-amount" readonly placeholder="自动生成大写金额"> ）。</li>
             </ul>
         </div>
     </div>
@@ -245,14 +249,14 @@
     <div class="clause-block">
         <p class="clause-title">5.1 知识产权归属</p>
         <ul class="bullet-list">
-            <li>甲方委托乙方处理之所有文献,其著作权及相关知识产权均归原作者或原出版机构所有。乙方仅为代为操作打印机与扫描仪的“劳务代工者”,对文献内容不主张,不享有,也不转让任何知识产权。</li>
+            <li>甲方委托乙方处理之所有文献,其著作权及相关知识产权均归原作者或原出版机构所有。乙方仅为代为操作的“劳务代工者”,对文献内容不主张,不享有,也不转让任何知识产权。</li>
         </ul>
     </div>
 
     <div class="clause-block">
         <p class="clause-title">5.2 侵权免责与切断</p>
         <ul class="bullet-list">
-            <li>甲方承诺其委托代印、扫描之行为符合《中华人民共和国著作权法》中关于“合理使用”之规定。若因甲方隐瞒商业目的,超范围使用或二次传播引发任何知识产权侵权纠纷,全部法律责任与经济赔偿均由甲方独立承担。 乙方作为仅收取微薄劳务费的技术服务方,对此不承担任何连带责任。</li>
+            <li>甲方承诺其委托代印、扫描、下载之行为符合《中华人民共和国著作权法》中关于“合理使用”之规定。若因甲方隐瞒商业目的,超范围使用或二次传播引发任何知识产权侵权纠纷,全部法律责任与经济赔偿均由甲方独立承担。 乙方作为仅收取微薄劳务费的技术服务方,对此不承担任何连带责任。</li>
         </ul>
     </div>
 
@@ -318,7 +322,7 @@
                 </td>
                 <td>
                     <strong>乙方 (签字盖章)</strong>
-                    <div style="font-family: 'SimSun', serif; font-size: 26px; color: #b30000; font-weight: bold; margin-top: 35px; margin-bottom: 30px; letter-spacing: 5px; text-align: center;">
+                    <div style="font-family: 'Ma Shan Zheng', cursive; font-size: 32px; color: #000000; margin-top: 30px; margin-bottom: 25px; letter-spacing: 5px; text-align: center;">
                         李怡萱
                     </div>
                     <p style="margin-top:10px; margin-bottom:0;">日期：<span id="date-partyB"></span></p>
@@ -355,44 +359,52 @@
     function calculatePrices(pages) {
         const serviceType = document.getElementById('service-type').value;
         const itemTotalDisplay = document.getElementById('total-item-price');
-        const isArchiveChecked = document.getElementById('archive-fee-check').checked;
+        const isUrgentChecked = document.getElementById('urgent-fee-check').checked;
 
-        // 若完全未輸入頁數且未勾選調閱費，或選擇不需服務，則清空 3.2 與 3.3 金額
-        if ((pages === 0 && !isArchiveChecked) || serviceType === 'none') {
+        if (serviceType === 'none') {
             itemTotalDisplay.value = "";
-            itemTotalDisplay.placeholder = "请输入页数";
+            itemTotalDisplay.placeholder = "请选择服务";
             updateBudget(0);
             return;
         }
 
-        let baseServiceTotal = 0; // 僅影印/掃描服務費
+        let baseTotal = 0; 
+        let taxableServiceTotal = 0; 
 
         if (serviceType === 'bw') {
-            baseServiceTotal = pages * 2.0;
+            baseTotal = pages * 2.0;
+            taxableServiceTotal = baseTotal;
         } else if (serviceType === 'color') {
-            baseServiceTotal = pages * 4.0;
+            baseTotal = pages * 4.0;
+            taxableServiceTotal = baseTotal;
         } else if (serviceType === 'scan') {
             if (pages > 0) {
                 if (pages < 35) {
-                    baseServiceTotal = 50.0;
-                } else if (pages >= 35 && pages <= 99) {
-                    baseServiceTotal = pages * 1.5;
-                } else if (pages >= 100 && pages <= 499) {
-                    baseServiceTotal = pages * 1.0;
-                } else if (pages >= 500) {
-                    baseServiceTotal = pages * 0.8;
+                    baseTotal = 50.0;
+                } else if (pages >= 35 && pages <= 100) {
+                    baseTotal = pages * 1.5;
+                } else if (pages >= 101 && pages <= 500) {
+                    baseTotal = pages * 1.0;
+                } else if (pages >= 501) {
+                    baseTotal = pages * 0.8;
                 }
             }
+            taxableServiceTotal = baseTotal;
+        } else if (serviceType === 'download-single') {
+            baseTotal = 50.0;
+            taxableServiceTotal = 0.0; 
+        } else if (serviceType === 'download-multi') {
+            baseTotal = 100.0;
+            taxableServiceTotal = 0.0; 
         }
 
-        let archiveFee = isArchiveChecked ? 30.0 : 0.0;
-
-        // 若頁數為 0 且僅勾選調閱費，基礎價就等於調閱費
-        const displayBaseTotal = baseServiceTotal + archiveFee;
-        itemTotalDisplay.value = displayBaseTotal.toFixed(2) + " 元";
+        itemTotalDisplay.value = baseTotal.toFixed(2) + " 元";
         
-        // 3.3 項總金額：(服務費 × 1.3) + 調閱費(不參與30%服務費)
-        const finalTotal = (baseServiceTotal * 1.3) + archiveFee;
+        let finalTotal = (taxableServiceTotal * 1.3) + (baseTotal - taxableServiceTotal);
+        if (isUrgentChecked) {
+            finalTotal *= 1.15;
+        }
+
         updateBudget(finalTotal);
     }
 
@@ -537,6 +549,7 @@
         const emailA = document.getElementById('partyA-email').value.trim();
         const nicknameA = document.getElementById('partyA-nickname').value.trim();
         const docName1 = document.getElementById('doc-name-1').value.trim();
+        const serviceType = document.getElementById('service-type').value;
         const docPage1 = parseFloat(document.getElementById('doc-page-1').value) || 0;
 
         if (!nameA) { alert('请填写甲方“甲方姓名”,此为必填写字段。'); return; }
@@ -544,7 +557,10 @@
         if (!emailA) { alert('请填写甲方“电子邮箱”,此为必填写字段。'); return; }
         if (!nicknameA) { alert('请填写甲方“平台昵称”,此为必填写字段。'); return; }
         if (!docName1) { alert('请至少填写第一本“文献名称”,作为主要的委托标的。'); return; }
-        if (docPage1 <= 0) { alert('请填写第一本“文献页数”,作为合并算费的基础。'); return; }
+        if ((serviceType === 'scan' || serviceType === 'bw' || serviceType === 'color') && docPage1 <= 0) { 
+            alert('当前服务类型需要填写第一本“文献页数”,作为算费的基础。'); 
+            return; 
+        }
 
         document.getElementById('clear-btn').style.display = 'none';
 
